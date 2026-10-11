@@ -18,7 +18,8 @@
     "@fontsource/chakra-petch": "^5.1.0",
     "@fontsource/ibm-plex-mono": "^5.1.0",
     "astro": "^5.1.0",
-    "lucide-static": "^1.55.0"
+    "lucide-static": "^1.55.0",
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "vitest": "^3.0.0"
