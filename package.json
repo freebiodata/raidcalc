@@ -1,0 +1,26 @@
+{
+  "name": "raidcalc",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "RaidCalc - free Rust raid cost and sulfur calculators: raid cost calculator, cheapest raid solver and sulfur farming ETA.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "qa": "node scripts/qa-dist.mjs",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource/barlow": "^5.1.0",
+    "@fontsource/chakra-petch": "^5.1.0",
+    "@fontsource/ibm-plex-mono": "^5.1.0",
+    "astro": "^5.1.0",
+    "lucide-static": "^1.55.0"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.0"
+  }
+}

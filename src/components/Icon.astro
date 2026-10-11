@@ -1,0 +1,27 @@
+---
+// Inlines an official Lucide icon (https://lucide.dev, ISC license) at build time.
+import * as lucide from 'lucide-static';
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+  /** decorative by default; pass a label to make it meaningful */
+  label?: string;
+}
+
+const { name, size = 16, class: className = '', label } = Astro.props;
+const toPascal = (s: string) => s.split('-').map((p) => p[0].toUpperCase() + p.slice(1)).join('');
+const svg = (lucide as unknown as Record<string, string>)[toPascal(name)];
+
+let html = '';
+if (svg) {
+  html = svg
+    .replace(/width="24"/, `width="${size}"`)
+    .replace(/height="24"/, `height="${size}"`)
+    .replace('<svg', `<svg class="${className}"${label ? ` role="img" aria-label="${label}"` : ' aria-hidden="true" focusable="false"'}`);
+} else {
+  html = `<svg class="${className}" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>`;
+}
+---
+<Fragment set:html={html} />

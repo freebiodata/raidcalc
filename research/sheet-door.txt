@@ -1,0 +1,31 @@
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+| title = Sheet Metal Door
+| description = A hinged door which is made out of sheets of metal and wood
+| shortname = door.hinged.metal
+| health = 250
+| stacksize = 1
+| type = Construction
+| craftable = Yes
+| knowndefault = No
+| crafttime = 30
+| ingredients = {{ItemCount|Metal Fragments|150}}
+| usedinitems = No
+}}
+
+The '''Sheet Metal Door''' is a hinged door with 250 health which is made out of metal fragments and wood. It can be placed in an empty doorway and locked with a [[Lock]] or [[Code Lock]]. It is very resistant to damage from tools, melee weapons, and bullets, but is extremely vulnerable to explosive damage and can be destroyed by a single [[Timed Explosive Charge]]. Due to the changes in dev blog 145 (Changing the effectiveness of F1 Grenades on structures), the most effective way to take down the door is with a rocket.  
+
+The Sheet Metal Door can be placed by crafting it and selecting the door in your hotbar, and then mousing over an empty doorway. A blue silhouette of the door will appear, and you can left-click to place it. If the silhouette of the door is red, it cannot be placed in its current location.
+
+==Crafting==
+The Sheet Metal Door can be crafted with:
+*150 [[Metal Fragments]]
+
+==Skin==
+{{:Sheet Metal Door/Skins}}
+
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Deployable]]
+[[Category:Door]]
+[[Category:Construction]]

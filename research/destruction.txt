@@ -1,0 +1,213 @@
+The following table compares commonly used explosive devices, in terms of the minimum amount required to destroy a given object:
+
+{| class="wikitable" style="margin-left: auto; margin-right: auto; text-align: center; border: 3px solid #141414; background: dark gray"
+|-
+| style="border: 2px solid #141414" | [[File:Explosion_icon.png|64px]]
+| style="border: 2px solid #141414" | [[File:Wood_Tier_Icon.png|64px|link=Building#Wood_Tier]]
+| style="border: 2px solid #141414" | [[File:Stone_Tier_Icon.png|64px|link=Building#Stone_Tier]]
+| style="border: 2px solid #141414" | [[File:Sheet_Metal_Tier_Icon.png|64px|link=Building#Sheet_Metal_Tier]]
+| style="border: 2px solid #141414" | [[File:Armored_Tier_Icon.png|64px|link=Building#Armored_Tier]]
+| style="border: 2px solid #141414" | [[File:Wooden_Door_icon.png|64px|link=Wooden_Door]]
+| style="border: 2px solid #141414" | [[File:Sheet_Metal_Door_icon.png|64px|link=Sheet_Metal_Door]]
+| style="border: 2px solid #141414" | [[File:Garage_Door_icon.png|64px|link=Garage_Door]]
+| style="border: 2px solid #141414" | [[File:Armored_Door_icon.png|64px|link=Armored_Door]]
+| style="border: 2px solid #141414" | [[File:Ladder_Hatch_icon.png|64px|link=Ladder_Hatch]]
+| style="border: 2px solid #141414" | [[File:High_External_Wooden_Wall_icon.png|64px|link=High_External_Wooden_Wall]]
+| style="border: 2px solid #141414" | [[File:High_External_Stone_Wall_icon.png|64px|link=High_External_Stone_Wall]]
+|-
+| style="border: 2px solid #141414; background: #232626" | [[File:Timed_Explosive_Charge_icon.png|64px|link=Timed_Explosive_Charge]]
+| style="border: 2px solid #141414; background: #232626" | '''1''' <!--Wood tier-->
+| style="border: 2px solid #141414; background: #232626" | '''2''' <!--Stone tier-->
+| style="border: 2px solid #141414; background: #232626" | '''4''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414; background: #232626" | '''8''' <!--Armored tier-->
+| style="border: 2px solid #141414; background: #232626" | '''1''' <!--Wooden door-->
+| style="border: 2px solid #141414; background: #232626" | '''1''' <!--Sheet metal door-->
+| style="border: 2px solid #141414; background: #232626" | '''2''' <!--Garage door-->
+| style="border: 2px solid #141414; background: #232626" | '''3''' <!--Armored door-->
+| style="border: 2px solid #141414; background: #232626" | '''1''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414; background: #232626" | '''2''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414; background: #232626" | '''2''' <!--High External Stone Wall-->
+|-
+| [[File:Rocket_icon.png|64px|link=Rocket]]
+| style="border: 2px solid #141414" | '''2''' <!--Wood tier-->
+| style="border: 2px solid #141414" | '''4''' <!--Stone tier-->
+| style="border: 2px solid #141414" | '''8''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414" | '''15''' <!--Armored tier-->
+| style="border: 2px solid #141414" | '''1''' <!--Wooden door-->
+| style="border: 2px solid #141414" | '''2''' <!--Sheet metal door-->
+| style="border: 2px solid #141414" | '''3''' <!--Garage door-->
+| style="border: 2px solid #141414" | '''5''' <!--Armored door-->
+| style="border: 2px solid #141414" | '''2''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414" | '''3''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414" | '''4''' <!--High External Stone Wall-->
+|-
+| style="border: 2px solid #141414; background: #232626" | [[File:High_Velocity_Rocket_icon.png|64px|link=High Velocity Rocket]]
+| style="border: 2px solid #141414; background: #232626" | 5 <!--Wood tier-->
+| style="border: 2px solid #141414; background: #232626" | 16 <!--Stone tier-->
+| style="border: 2px solid #141414; background: #232626" | 33 <!--Sheet metal tier-->
+| style="border: 2px solid #141414; background: #232626" | 65 <!--Armored tier-->
+| style="border: 2px solid #141414; background: #232626" | 2 <!--Wooden door-->
+| style="border: 2px solid #141414; background: #232626" | '''5''' <!--Sheet metal door-->
+| style="border: 2px solid #141414; background: #232626" | '''12''' <!--Garage door-->
+| style="border: 2px solid #141414; background: #232626" | '''16''' <!--Armored door-->
+| style="border: 2px solid #141414; background: #232626" | '''5''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414; background: #232626" | 9 <!--High External Wooden Wall-->
+| style="border: 2px solid #141414; background: #232626" | 15 <!--High External Stone Wall-->
+|-
+| style="border: 2px solid #141414" | [[File:Satchel_Charge_icon.png|64px|link=Satchel_Charge]]
+| style="border: 2px solid #141414" | '''3''' <!--Wood tier-->
+| style="border: 2px solid #141414" | '''10''' <!--Stone tier-->
+| style="border: 2px solid #141414" | '''23''' <!--Sheet metal tier-->
+| style="border: 2px solid #141414" | '''46''' <!--Armored tier-->
+| style="border: 2px solid #141414" | 2
+| style="border: 2px solid #141414" | '''4''' <!--Sheet metal door-->
+| style="border: 2px solid #141414" | '''9''' <!--Garage door-->
+| style="border: 2px solid #141414" | '''15''' <!--Armored door-->
+| style="border: 2px solid #141414" | '''4''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414" | '''6''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414" | '''10''' <!--High External Stone Wall-->
+|-
+| style="border: 2px solid #141414; background: #232626" | [[File:Beancan_Grenade_icon.png|64px|link=Beancan_Grenade]]
+| style="border: 2px solid #141414; background: #232626" | '''13''' <!--Wood tier-->
+| style="border: 2px solid #141414; background: #232626" | '''46''' <!--Stone tier-->
+| style="border: 2px solid #141414; background: #232626" | '''112''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414; background: #232626" | '''223''' <!--Armored tier-->
+| style="border: 2px solid #141414; background: #232626" | '''6''' <!--Wooden door-->
+| style="border: 2px solid #141414; background: #232626" | '''18''' <!--Sheet metal door-->
+| style="border: 2px solid #141414; background: #232626" | '''42''' <!--Garage door-->
+| style="border: 2px solid #141414; background: #232626" | '''56''' <!--Armored door-->
+| style="border: 2px solid #141414; background: #232626" | '''18''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414; background: #232626" | '''26''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414; background: #232626" | '''46''' <!--High External Stone Wall-->
+|-
+| [[File:F1_Grenade_icon.png|64px|link=F1_Grenade]]
+| style="border: 2px solid #141414" | '''125''' <!--Wood tier-->
+| style="border: 2px solid #141414" | '''250''' <!--Stone tier-->
+| style="border: 2px solid #141414" | '''1000''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414" | '''2000''' <!--Armored tier-->
+| style="border: 2px solid #141414" | '''40''' <!--Wooden door-->
+| style="border: 2px solid #141414" | '''50''' <!--Sheet metal door-->
+| style="border: 2px solid #141414" | '''120''' <!--Garage door-->
+| style="border: 2px solid #141414" | '''160''' <!--Armored door-->
+| style="border: 2px solid #141414" | '''50''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414" | '''250''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414" | '''250''' <!--High External Stone Wall-->
+|-
+|[[File:Survey Charge icon.png|64px|link=Survey_Charge]]
+| style="border: 2px solid #141414" | '''72''' <!--Wood tier-->
+| style="border: 2px solid #141414" | '''289''' <!--Stone tier-->
+| style="border: 2px solid #141414" | '''358''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414" | '''478''' <!--Armored tier-->
+| style="border: 2px solid #141414" | '''19''' <!--Wooden door-->
+| style="border: 2px solid #141414" | '''88''' <!--Sheet metal door-->
+| style="border: 2px solid #141414" | '''251''' <!--Garage door-->
+| style="border: 2px solid #141414" | '''334''' <!--Armored door-->
+| style="border: 2px solid #141414" | '''35''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414" | '''175''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414" | '''433''' <!--High External Stone Wall-->
+|}<noinclude>
+{| class="wikitable" style="margin-left: auto; margin-right: auto; text-align: center; border: 3px solid #141414; background: dark gray"
+|-
+| style="border: 2px solid #141414" | [[File:Explosion_icon.png|64px]]
+| style="border: 2px solid #141414" | [[File:Wood_Tier_Icon.png|61x61px|link=Building#Wood_Tier]]250 hp
+| style="border: 2px solid #141414" | [[File:Stone_Tier_Icon.png|61x61px|link=Building#Stone_Tier]]500 hp
+| style="border: 2px solid #141414" | [[File:Sheet_Metal_Tier_Icon.png|62x62px|link=Building#Sheet_Metal_Tier]]1000 hp
+| style="border: 2px solid #141414" | [[File:Armored_Tier_Icon.png|59x59px|link=Building#Armored_Tier]]2000 hp
+| style="border: 2px solid #141414" | [[File:Wooden_Door_icon.png|64px|link=Wooden_Door]]200 hp
+| style="border: 2px solid #141414" | [[File:Sheet_Metal_Door_icon.png|64px|link=Sheet_Metal_Door]]250 hp
+| style="border: 2px solid #141414" | [[File:Garage_Door_icon.png|64px|link=Garage_Door]]600 hp
+| style="border: 2px solid #141414" | [[File:Armored_Door_icon.png|64px|link=Armored_Door]]1000 hp
+| style="border: 2px solid #141414" | [[File:Ladder_Hatch_icon.png|64px|link=Ladder_Hatch]]250 hp
+| style="border: 2px solid #141414" | [[File:High_External_Wooden_Wall_icon.png|64px|link=High_External_Wooden_Wall]]500 hp
+| style="border: 2px solid #141414" | [[File:High_External_Stone_Wall_icon.png|64px|link=High_External_Stone_Wall]]500 hp
+|-
+| style="border: 2px solid #141414; background: #232626" | [[File:Timed_Explosive_Charge_icon.png|64px|link=Timed_Explosive_Charge]]
+| style="border: 2px solid #141414; background: #232626" | '''495''' <!--Wood tier-->
+| style="border: 2px solid #141414; background: #232626" | '''275''' <!--Stone tier-->
+| style="border: 2px solid #141414; background: #232626" | '''275''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414; background: #232626" | '''275''' <!--Armored tier-->
+| style="border: 2px solid #141414; background: #232626" | '''1100''' <!--Wooden door-->
+| style="border: 2px solid #141414; background: #232626" | '''440''' <!--Sheet metal door-->
+| style="border: 2px solid #141414; background: #232626" | '''440''' <!--Garage door-->
+| style="border: 2px solid #141414; background: #232626" | '''440''' <!--Armored door-->
+| style="border: 2px solid #141414; background: #232626" | '''440''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414; background: #232626" | '''495''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414; background: #232626" | '''275''' <!--High External Stone Wall-->
+|-
+| [[File:Rocket_icon.png|64px|link=Rocket]]
+| style="border: 2px solid #141414" | '''247.6''' <!--Wood tier-->
+| style="border: 2px solid #141414" | '''137.6''' <!--Stone tier-->
+| style="border: 2px solid #141414" | '''137.6''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414" | '''137.6'''<!--Armored tier-->
+| style="border: 2px solid #141414" | '''550.4''' <!--Wooden door-->
+| style="border: 2px solid #141414" | '''220.4''' <!--Sheet metal door-->
+| style="border: 2px solid #141414" | '''220.4''' <!--Garage door-->
+| style="border: 2px solid #141414" | '''220.4''' <!--Armored door-->
+| style="border: 2px solid #141414" | '''220.4''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414" | '''247.6''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414" | '''137.6''' <!--High External Stone Wall-->
+|-
+| style="border: 2px solid #141414; background: #232626" | [[File:High_Velocity_Rocket_icon.png|64px|link=High Velocity Rocket]]
+| style="border: 2px solid #141414; background: #232626" | '''?''' <!--Wood tier-->
+| style="border: 2px solid #141414; background: #232626" | '''31''' <!--Stone tier-->
+| style="border: 2px solid #141414; background: #232626" | '''31''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414; background: #232626" | '''31''' <!--Armored tier-->
+| style="border: 2px solid #141414; background: #232626" | '''?''' <!--Wooden door-->
+| style="border: 2px solid #141414; background: #232626" | '''51''' <!--Sheet metal door-->
+| style="border: 2px solid #141414; background: #232626" | '''52''' <!--Garage door-->
+| style="border: 2px solid #141414; background: #232626" | '''52''' <!--Armored door-->
+| style="border: 2px solid #141414; background: #232626" | 51 <!--Ladder Hatch-->
+| style="border: 2px solid #141414; background: #232626" | '''?''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414; background: #232626" | '''?''' <!--High External Stone Wall-->
+|-
+| style="border: 2px solid #141414;" | [[File:Satchel_Charge_icon.png|64px|link=Satchel_Charge]]
+| style="border: 2px solid #141414;" | '''91.5''' <!--Wood tier-->
+| style="border: 2px solid #141414;" | '''51.5''' <!--Stone tier-->
+| style="border: 2px solid #141414;" | '''43.5'''<!--Sheet Metal tier-->
+| style="border: 2px solid #141414;" | '''43.5''' <!--Armored tier-->
+| style="border: 2px solid #141414;" | '''170''' <!--Wooden door-->
+| style="border: 2px solid #141414;" | '''70''' <!--Sheet metal door-->
+| style="border: 2px solid #141414;" | '''70''' <!--Garage door-->
+| style="border: 2px solid #141414;" | '''70''' <!--Armored door-->
+| style="border: 2px solid #141414;" | '''70''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414;" | '''91.5''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414;" | '''51.5''' <!--High External Stone Wall-->
+|-
+| style="border: 2px solid #141414; background: #232626" | [[File:F1_Grenade_icon.png|64px|link=F1_Grenade]]
+| style="border: 2px solid #141414; background: #232626" | '''2''' <!--Wood tier-->
+| style="border: 2px solid #141414; background: #232626" | '''2''' <!--Stone tier-->
+| style="border: 2px solid #141414; background: #232626" | '''1''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414; background: #232626" | '''1''' <!--Armored tier-->
+| style="border: 2px solid #141414; background: #232626" | 5 <!--Wooden door-->
+| style="border: 2px solid #141414; background: #232626" | '''5''' <!--Sheet metal door-->
+| style="border: 2px solid #141414; background: #232626" | '''5''' <!--Garage door-->
+| style="border: 2px solid #141414; background: #232626" | '''34.5''' <!--Armored door-->
+| style="border: 2px solid #141414; background: #232626" | '''34.5''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414; background: #232626" | '''42''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414; background: #232626" | '''23.5''' <!--High External Stone Wall-->
+|-
+| style="border: 2px solid #141414" | [[File:Beancan_Grenade_icon.png|64px|link=Beancan_Grenade]]
+| style="border: 2px solid #141414" | '''19.5''' <!--Wood tier-->
+| style="border: 2px solid #141414" | '''11''' <!--Stone tier-->
+| style="border: 2px solid #141414" | '''9''' <!--Sheet Metal tier-->
+| style="border: 2px solid #141414" | '''9''' <!--Armored tier-->
+| style="border: 2px solid #141414" | '''35''' <!--Wooden door-->
+| style="border: 2px solid #141414" | '''14.5''' <!--Sheet metal door-->
+| style="border: 2px solid #141414" | '''14.5''' <!--Garage door-->
+| style="border: 2px solid #141414" | '''14.5''' <!--Armored door-->
+| style="border: 2px solid #141414" | '''14.5''' <!--Ladder Hatch-->
+| style="border: 2px solid #141414" | '''19.5''' <!--High External Wooden Wall-->
+| style="border: 2px solid #141414" | '''11''' <!--High External Stone Wall-->
+|}</noinclude>
+[[Category:Explosives]]
+[[Category:Ammunition]]
+[[Category:Assault Rifle]]
+[[Category:Tools]]
+[[Category:Weapons]]
+[[Category:Sticks]]
+[[Category:Deployable]]
+[[Category:EXPLOSIVE AMMO]]
+[[Category:Melee]]
+[[Category:Espada]]
+[[Category:Flame]]
+[[Category:Sheet metal double door]]

@@ -1,0 +1,52 @@
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+ | title             = Wooden Door
+ | description       = A hinged door which is made out of wood
+ | shortname         = door.hinged.wood
+ | stacksize         = 1
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 30
+ | ingredients       = {{ItemCount|Wood|300}}
+ | usedinitems       = No
+|explosion = 2 satchels}}
+
+The '''Wooden Door''' is a hinged door which is made out of wood. It is the weakest and cheapest of all the doors, and is vulnerable to shotgun shells, fire, and explosive weapons. The Wooden Door has 200 health and can be placed in an open doorway. It can then be locked with a [[Lock]] or [[Code Lock]]. 
+
+(As of 2/12/2024, It could be also be unlocked by using the pickpocketing tool: [[Sticks]]) 
+
+To replace, open it without a lock and hold E, and choose to pick it up in the context menu.
+
+== Tip ==
+It is advised to use [[Timed Explosive Charge|Timed Explosive Charges]] on Wooden Doors, since they are '''''EXTREMELY''''' good for protecting the door.
+
+== Crafting ==
+The Wooden Door can be crafted with:
+* 9,000 [[Wood]]
+The Wooden Door takes 480 seconds to craft.
+
+== Skins ==
+{{:Wooden Door/Skins}}
+
+
+{{ExperimentalItemsFooter}}
+
+== See Also ==
+* [[Wood Double Door]]
+* [[Armored Door]]
+* [[Armored Double Door]]
+* [[Chainlink Fence Gate]]
+* [[Prison Cell Gate]]
+* [[Sheet Metal Door]]
+* [[Sheet Metal Double Door]]
+* [[Shop Front]]
+* [[Wood Double Door]]
+* [[Lock]]
+* [[Code Lock]]
+[[Category:Items]]
+[[Category:Experimental Content]]
+[[Category:Deployable]]
+[[Category:Door]]
+[[Category:Construction]]
+[[Category:Destruction]]

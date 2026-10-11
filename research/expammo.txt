@@ -1,0 +1,128 @@
+{{Infobox-Item
+ | title             = Explosive 5.56 Rifle Ammo
+ | description       = This ammo explodes on contact dealing a small amount of fragmentation damage to nearby objects.
+ | shortname         = ammo.rifle.explosive
+ | stacksize         = 128
+ | type              = Ammunition
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 10
+ | ingredients       = {{ItemCount|Metal Fragments|10}}{{ItemCount|Gun Powder|20}}{{ItemCount|Sulfur|10}}
+ | usedinitems       = No
+}}{{Template:LastUpdate|904.83}}
+
+'''Explosive 5.56 Rifle Ammo''' is a variant of the standard [[5.56 Rifle Ammo]]. It is commonly used for [[Raiding]], and less commonly used as ammunition for rifles and large firearms. It will do small amounts of damage to players '''and structures''' in an area and deals extra damage upon a direct hit. Small bits of shrapnel may cause [[bleeding]], although this has not been reliably tested. It also deals relatively significant damage to Wood, Stone and Sheet Metal structures, and especially to [[Sheet Metal Door]]s; It requires less [[Gun Powder|Gunpowder]] & Metal to destroy Sheet Metal Doors when compared to [[Satchel Charge]]s. One of the few downsides of this ammunition as compared to regular 5.56 Rifle Ammo is that it is more expensive to craft, it is more difficult to find in loot crates and airdrops, as well as degrading the gun used to fire it along with the silencer, if used, faster than the standard 5.56 rifle ammo.
+
+The community has debated on the power of the explosive ammo when paired with a [[Silencer]], and many believe it to be overpowered, resulting in a nerf in early 2019.
+
+== Damage and function times ==
+{{Infobox-Damage
+ | Bullet            = 45
+ | Explosion         = 3
+}}
+{{clr}}
+== Crafting ==
+Explosive ammo can be crafted once the player has gathered the following materials:
+* 10 [[Metal Fragments]]
+* 20 [[Gun Powder]]
+* 10 [[Sulfur]]
+
+'''Notes:'''
+* It takes 10 seconds to craft two bullets.
+* The round sometimes spawns a small fire entity when it impacts an object, much like incendiary ammo.
+
+== Researching ==
+The Explosive 5.56 Rifle Ammo Blueprint can be researched at a [[Research Table]] with:
+* 125 [[Scrap]]
+==Destruction==
+The following table shows the Explosive Ammo rounds needed to destroy a given component when fired from a Semi Automatic Rifle: Last Updated Jan 30 2024.
+
+{| class="wikitable" style="margin-left: auto; margin-right: auto; text-align: center; border: 3px solid #141414; background: dark gray"
+|+Demolition Cost
+|-
+| [[File:Explosion_icon.png|64px|link=http://rust.wikia.com/wiki/File:Explosion_icon.png]]
+| style="border: 2px solid #141414" | [[File:Wood_Tier_Icon.png|64px|link=http://rust.wikia.com/wiki/Building#Wood_Tier]]
+| style="border: 2px solid #141414" | [[File:Stone_Tier_Icon.png|64px|link=http://rust.wikia.com/wiki/Building#Stone_Tier]]
+| [[File:Sheet_Metal_Tier_Icon.png|64px|link=http://rust.wikia.com/wiki/Building#Sheet_Metal_Tier]]
+| style="border: 2px solid #141414" | [[File:Armored_Tier_Icon.png|64px|link=http://rust.wikia.com/wiki/Building#Armored_Tier]]
+| [[File:Wooden_Door_icon.png|64px|link=http://rust.wikia.com/wiki/Wooden_Door]]
+| style="border: 2px solid #141414" | [[File:Sheet_Metal_Door_icon.png|64px|link=http://rust.wikia.com/wiki/Sheet_Metal_Door]]
+| style="border: 2px solid #141414" | [[File:Garage Door icon.png|64px|link=http://rust.wikia.com/wiki/Garage_Door]]
+| [[File:Armored_Door_icon.png|64px|link=http://rust.wikia.com/wiki/Armored_Door]]
+| style="border: 2px solid #141414" | [[File:High_External_Wooden_Wall_icon.png|64px|link=http://rust.wikia.com/wiki/High_External_Wooden_Wall]]
+| [[File:High_External_Stone_Wall_icon.png|64px|link=http://rust.wikia.com/wiki/High_External_Stone_Wall]]
+|-
+| style="border: 2px solid #141414; background: #232626" | Strong Side (SS)
+| style="border: 2px solid #141414; background: #232626" | 50
+| style="border: 2px solid #141414; background: #232626" | 127
+| style="border: 2px solid #141414; background: #232626" | 400
+| style="border: 2px solid #141414; background: #232626" | 800
+| style="border: 2px solid #141414; background: #232626" | 19
+| style="border: 2px solid #141414; background: #232626" | 63
+| style="border: 2px solid #141414; background: #232626" | 150
+| style="border: 2px solid #141414; background: #232626" | 250
+| style="border: 2px solid #141414; background: #232626" | 100
+| style="border: 2px solid #141414; background: #232626" | 200
+|-
+|Weak Side
+(WS)
+|42
+|127
+|400
+|800
+|19
+|63
+|150
+|250
+|100
+|200
+|-
+|Charcoal
+|SS 1500
+WS 1260
+|3840
+|12000
+|24000
+|600
+|1920
+|4500
+|7500
+|3000
+|6000
+|-
+|Sulfur
+|SS 1250
+WS 1050
+|3200
+|10000
+|20000
+|500
+|1600
+|3750
+|6250
+|2500
+|5000
+|-
+|Metal Frags
+|SS 250
+WS 210
+|640
+|2000
+|4000
+|100
+|320
+|750
+|1250
+|500
+|1000
+|}
+
+Note: Single doors and double doors need the same amount of {{ID|{{PAGENAME}}}}.
+[[Category:Items]]
+[[Category:Ammunition]]
+[[Category:Explosives]]
+[[Category:Experimental Content]]
+[[Category:Doors]]
+[[Category:Stone foundaton]]
+[[Category:Bradly]]
+[[Category:Metal barricade]]{{ExperimentalItemsFooter}}

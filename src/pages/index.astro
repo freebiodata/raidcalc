@@ -1,0 +1,150 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import { TARGETS, EXPLOSIVES, DATA_SNAPSHOT } from '../data/raid-data';
+import { unitsFor, fmt, cheapestOptions } from '../lib/raid';
+import { organizationBlock, websiteBlock } from '../lib/schema';
+
+const title = 'RaidCalc – Rust Raid Cost & Sulfur Calculators';
+const description =
+  'Three free Rust raid calculators: price any raid in C4, rockets and satchels, find the cheapest sulfur route, and time the sulfur farm. No sign-up.';
+
+const faq = [
+  {
+    q: 'How many rockets does it take to break an armored wall?',
+    a: `<p><strong>15 rockets</strong> (2,000 HP ÷ 137.575 damage per rocket, rounded up) = <strong>21,000 sulfur</strong>. Sheet metal walls take 8, stone walls 4, wood walls 2.</p>`,
+  },
+  {
+    q: 'How much sulfur do I need for a typical raid?',
+    a: `<p>A simple wood-or-sheet-metal base with a few doors usually dies for <strong>2,000–8,000 sulfur</strong>; stone bases run <strong>10,000–25,000</strong>; armored walls push past <strong>60,000</strong>. Price your exact target list in the <a href="/raid-cost-calculator/">raid cost calculator</a> instead of guessing.</p>`,
+  },
+  {
+    q: 'What explosive is cheapest per damage?',
+    a: `<p>Per sulfur, explosive 5.56 ammo and beancan grenades win on paper; satchels are the practical early-game pick; rockets are the all-rounder; C4 is for when you need speed or a T3 setup. The <a href="/cheapest-raid-solver/">cheapest raid solver</a> ranks them for each target, because the winner changes with wall tier.</p>`,
+  },
+  {
+    q: 'Is RaidCalc free? Do I need an account?',
+    a: `<p>Free, no sign-up, no ads covering the tools, and your raid plans never leave your browser - they live in local storage so you can hand a plan between the three calculators.</p>`,
+  },
+];
+---
+<Base title={title} description={description} path="/"
+  jsonLd={[organizationBlock(), websiteBlock()]}
+>
+  <section class="hero">
+    <div class="container">
+      <span class="kicker"><Icon name="bomb" size={13} /> Free forever · no sign-up</span>
+      <h1>Plan the raid. Count the cost. Farm the sulfur.</h1>
+      <p class="value-line">
+        RaidCalc is three workbench-grade calculators for Rust raiders: price any target list explosive by explosive,
+        find the sulfur-cheapest route, and see exactly how long the grind will take.
+      </p>
+      <div class="trust-microline">
+        <span><Icon name="check" size={14} /> Verified vs published raid tables · {DATA_SNAPSHOT}</span>
+        <span><Icon name="check" size={14} /> Plans stay in your browser</span>
+        <span><Icon name="check" size={14} /> Built for phones at the workbench</span>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+        <a class="btn" href="/raid-cost-calculator/"><Icon name="calculator" size={16} /> Price a raid</a>
+        <a class="btn btn-ghost" href="/cheapest-raid-solver/"><Icon name="route" size={16} /> Find the cheapest route</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section">
+    <div class="container">
+      <h2 style="margin-top:0">Three tools, one pipeline</h2>
+      <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+        <a class="tool-card" href="/raid-cost-calculator/">
+          <h3><Icon name="calculator" /> Raid Cost Calculator</h3>
+          <p>Pick walls, doors, garage doors, TC, turrets or SAM sites with quantities - get the exact C4, rocket, satchel, beancan, explosive-ammo, MLRS or torch count plus the sulfur bill.</p>
+          <span class="tool-card-go">Price a raid →</span>
+        </a>
+        <a class="tool-card" href="/cheapest-raid-solver/">
+          <h3><Icon name="route" /> Cheapest Raid Solver</h3>
+          <p>Every way to kill your target, ranked by sulfur: “cheapest raid = 185 explosive rounds + 2 C4 = 7,550 sulfur” - with workbench tiers flagged.</p>
+          <span class="tool-card-go">Rank my options →</span>
+        </a>
+        <a class="tool-card" href="/sulfur-farming-calculator/">
+          <h3><Icon name="pickaxe" /> Sulfur Farming ETA</h3>
+          <p>Enter your sulfur-per-minute or nodes-per-hour and see the ETA, node count, ore and charcoal for the raid you planned.</p>
+          <span class="tool-card-go">Time the grind →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="quick-answers" style="padding-top:0">
+    <div class="container">
+      <h2>The numbers everyone asks for</h2>
+      <p class="lede" style="color:var(--muted)">Computed from the same verified table the tools use - HP ÷ damage, rounded up.</p>
+      <div class="table-wrap" style="margin-top:14px">
+        <table class="data">
+          <thead>
+            <tr><th>Target</th><th class="num">HP</th><th class="num">Rockets</th><th class="num">C4</th><th class="num">Satchels</th><th class="num">Cheapest route (sulfur)</th></tr>
+          </thead>
+          <tbody>
+            {['wood-door', 'sheet-door', 'garage-door', 'stone-wall', 'sheet-wall', 'armored-wall', 'tc'].map((id) => {
+              const t = TARGETS.find((x) => x.id === id)!;
+              const best = cheapestOptions(id)[0];
+              const bestName = EXPLOSIVES.find((e) => e.id === best.explosiveId)!.short;
+              return (
+                <tr>
+                  <td>{t.name}</td>
+                  <td class="num">{fmt(t.hp)}</td>
+                  <td class="num">{unitsFor(id, 'rocket')}</td>
+                  <td class="num">{unitsFor(id, 'c4')}</td>
+                  <td class="num">{unitsFor(id, 'satchel')}</td>
+                  <td class="num hl">{best.count}× {bestName} = {fmt(best.sulfur)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note" style="margin-top:10px">Full table - including explosive ammo, MLRS and soft-side counts - on the <a href="/raid-chart/">Rust raid chart</a>.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>Why raiders keep RaidCalc open</h2>
+      <div class="card-grid">
+        <div class="tool-card">
+          <h3><Icon name="sigma" /> Math you can audit</h3>
+          <p>Every count is <span class="mono">ceil(HP ÷ damage)</span> from published wiki tables, cross-checked against the RustClash raid data. The <a href="/methodology/">methodology</a> shows the receipts.</p>
+        </div>
+        <div class="tool-card">
+          <h3><Icon name="workflow" /> Tools that hand off</h3>
+          <p>Price a raid → rank the routes → time the farm. Your target list follows you across all three calculators automatically.</p>
+        </div>
+        <div class="tool-card">
+          <h3><Icon name="shield" /> No dark patterns</h3>
+          <p>No account, no upload of your plans, no pop-ups over the calculator. If data is stale or disputed, the page says so.</p>
+        </div>
+        <div class="tool-card">
+          <h3><Icon name="smartphone" /> Built mobile-first</h3>
+          <p>Big steppers, mono numerals and one-thumb quantity tweaks - because the plan happens at the workbench, on a phone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container prose" style="max-width:860px">
+      <h2>How RaidCalc works</h2>
+      <ol>
+        <li><strong>Pick targets</strong> in the raid cost calculator - quantities, and which side you can hit.</li>
+        <li><strong>Get the shopping list</strong>: units per explosive, sulfur per line, workbench flags, raid total in sulfur and nodes.</li>
+        <li><strong>Optimize</strong>: the solver re-ranks every explosive by sulfur for your exact list and quotes the cheapest mixed raid.</li>
+        <li><strong>Plan the farm</strong>: enter your rate, get the ETA and the node count. Then go take it.</li>
+      </ol>
+      <p class="source-note">RaidCalc is an independent fan tool, not affiliated with Facepunch Studios. Data snapshot {DATA_SNAPSHOT}.</p>
+    </div>
+  </section>
+
+  <FAQ items={faq} id="home-faq" />
+</Base>

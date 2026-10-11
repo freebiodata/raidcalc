@@ -1,0 +1,35 @@
+{{Infobox-Item
+ | title             = Sulfur Ore
+ | description       = A rock containing sulfur. The sulfur can be extracted using a furnace.
+ | shortname         = sulfur.ore
+ | stacksize         = 1,000
+ | type              = Resources
+ | cookable          = Yes
+ | cooktime          = 5&thinsp;s
+ | temprange         = 800°C to 1200°C
+ | output            = {{ItemCount|Sulfur|1}}
+ | craftable         = No
+ | usedinitems       = No
+}}
+
+'''Sulfur Ore''' is a valuable resource, that once refined, can be used to craft [[Gun Powder]].
+
+==Obtaining==
+Sulfur Ore is obtained by mining rock [[Rocks|Nodes]].
+
+Mining one Sulfur rich node will give the player 300 Sulfur Ore
+
+It can also be obtained by gathering small, loose rocks, typically found on the ground. Rocks gathered this way will reward the player with 50 Sulfur Ore.
+
+==Refining==
+Sulfur Ore can be refined to [[Sulfur]] by putting it in a [[Furnace]] or [[Large Furnace]].
+
+==Gallery==
+<gallery>
+Rock Sulfur.jpg|Sulfur rich rock.
+Sulfur Collectible.jpg|Sulfur Ore that can be picked up.
+</gallery>
+
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Resource]]

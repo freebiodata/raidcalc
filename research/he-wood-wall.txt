@@ -1,0 +1,45 @@
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+ | title             = High External Wooden Wall
+ | description       = A high wooden wall used to keep people off your property.
+ | shortname         = wall.external.high
+ | stacksize         = 10
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 180
+ | ingredients       = {{ItemCount|Wood|1,500}}
+ | usedinitems       = No
+}}
+
+
+
+The High External Wooden Wall is a defensive, deployable structure used to help keep intruders away from your base. It is great when used in a combination with other defensive structures. Although fairly expensive, the High External Wooden Wall can be useful in repelling attacks against your buildings.
+
+The wall is about 4 meters tall and can be climbed over using ladders. Alternatively, it can be destroyed to gain access to the next layer of defenses. One High External Wooden Wall is about 2.5 meters in width, so in order to actually create a complete wall you may need to use dozens of these, or more depending on the area you want to secure.
+
+The wall cannot be removed or rotated using a hammer. The High External Wooden Wall cannot be placed onto a foundation, and must be placed on solid, level terrain.
+
+It is not recommended to use this as a main defense for a home, but rather as a secondary defense, used to encompass courtyards, large furnaces, quarries, and other external structures that cannot be placed on a foundation.  
+
+Even when within the radius of the [[Tool Cupboard]] the walls will still decay.  
+
+== Crafting ==
+The High External Wooden Wall can be crafted with:
+* 1500 [[Wood]]
+
+'''Notes:'''
+* It takes 7-30 seconds  to craft one wooden wall at a tier 1 workbench.
+* The wall has a health of 500.
+* It takes 2 [[Timed Explosive Charge]] to break. 1 charge will remove 495 health.
+* Weak protection from fire
+*It takes 125 scrap to research in the [[Research Table]].
+
+== Usage ==
+The wall is used to block your base from raiders. Also can be used to create a nicer look to your base. 
+
+{{ExperimentalItemsFooter}}
+[[Category:Barricade]]
+[[Category:Deployable]]
+[[Category:Items]]
+[[Category:Construction]]

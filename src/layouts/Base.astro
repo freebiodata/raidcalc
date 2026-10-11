@@ -1,0 +1,147 @@
+---
+import '@fontsource/chakra-petch/500.css';
+import '@fontsource/chakra-petch/600.css';
+import '@fontsource/chakra-petch/700.css';
+import '@fontsource/barlow/400.css';
+import '@fontsource/barlow/500.css';
+import '@fontsource/barlow/600.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '../styles/global.css';
+import Icon from '../components/Icon.astro';
+import Breadcrumbs, { type Crumb } from '../components/Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  /** relative to site root, no trailing slash needed */
+  path?: string;
+  crumbs?: Crumb[];
+  /** JSON-LD blocks, already serialized */
+  jsonLd?: object[];
+  noindex?: boolean;
+}
+
+const { title, description, path = '', crumbs = [], jsonLd = [], noindex = false } = Astro.props;
+const site = Astro.site ?? new URL('https://raidcalc.top');
+const canonical = new URL(path.replace(/^\//, '') || '/', site).href;
+const year = new Date().getFullYear();
+
+const nav = [
+  { href: '/raid-cost-calculator/', label: 'Raid Cost' },
+  { href: '/cheapest-raid-solver/', label: 'Cheapest Raid' },
+  { href: '/sulfur-farming-calculator/', label: 'Sulfur ETA' },
+  { href: '/raid-chart/', label: 'Raid Chart' },
+  { href: '/guides/soft-side-vs-hard-side/', label: 'Soft Side Guide' },
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="index, follow, max-image-preview:large" />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RaidCalc" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/og.png', site).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#1b1d20" />
+    {jsonLd.map((block) => <script type="application/ld+json" set:html={JSON.stringify(block)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to the calculator</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="/" aria-label="RaidCalc home">
+          <span class="logo-mark" aria-hidden="true"><span>RC</span></span>
+          Raid<span style="color:var(--orange-hi)">Calc</span>
+        </a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+          <Icon name="menu" size={20} />
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Main">
+          <ul>
+            {nav.map((item) => (
+              <li><a href={item.href} aria-current={canonical === new URL(item.href.replace(/\/$/, ''), site).href + '/' ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      {crumbs.length > 0 && <div class="container"><Breadcrumbs crumbs={crumbs} /></div>}
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="hazard-tape" aria-hidden="true"></div>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a class="logo" href="/" style="font-size:1.05rem">
+              <span class="logo-mark" aria-hidden="true"><span>RC</span></span>
+              Raid<span style="color:var(--orange-hi)">Calc</span>
+            </a>
+            <p style="color:var(--muted);font-size:0.88rem;max-width:34ch;margin-top:10px">
+              Free Rust raid cost and sulfur calculators. Plan the raid, count the cost, farm the sulfur.
+            </p>
+          </div>
+          <div>
+            <h3>Calculators</h3>
+            <ul>
+              <li><a href="/raid-cost-calculator/">Raid Cost Calculator</a></li>
+              <li><a href="/cheapest-raid-solver/">Cheapest Raid Solver</a></li>
+              <li><a href="/sulfur-farming-calculator/">Sulfur Farming ETA</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Reference</h3>
+            <ul>
+              <li><a href="/raid-chart/">Rust Raid Chart</a></li>
+              <li><a href="/guides/soft-side-vs-hard-side/">Soft Side vs Hard Side</a></li>
+              <li><a href="/sitemap/">All pages</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3>About</h3>
+            <ul>
+              <li><a href="/about/">About RaidCalc</a></li>
+              <li><a href="/methodology/">Methodology &amp; Sources</a></li>
+              <li><a href="/changelog/">Changelog</a></li>
+              <li><a href="/contact/">Contact</a></li>
+              <li><a href="/privacy/">Privacy</a></li>
+              <li><a href="/terms/">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© {year} RaidCalc · raidcalc.top</span>
+          <span>Not affiliated with Facepunch Studios. Rust is a trademark of Facepunch Studios.</span>
+          <span>Data snapshot 2026-10-11</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.querySelector('.nav-toggle');
+      const nav = document.getElementById('main-nav');
+      btn?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(!!open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+    </script>
+  </body>
+</html>

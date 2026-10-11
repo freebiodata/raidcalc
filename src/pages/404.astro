@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+
+const title = 'Page Not Found – RaidCalc';
+const description = 'That page doesn’t exist. Head back to the Rust raid calculators.';
+---
+<Base title={title} description={description} path="/404" noindex>
+  <section class="hero">
+    <div class="container prose">
+      <span class="kicker">Error 404</span>
+      <h1>Structure not found</h1>
+      <p class="value-line">Whatever you were raiding isn’t here - maybe it decayed. The calculators are all one click away:</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <a class="btn" href="/raid-cost-calculator/">Raid Cost Calculator</a>
+        <a class="btn btn-ghost" href="/cheapest-raid-solver/">Cheapest Raid Solver</a>
+        <a class="btn btn-ghost" href="/raid-chart/">Raid Chart</a>
+        <a class="btn btn-ghost" href="/">Home</a>
+      </div>
+    </div>
+  </section>
+</Base>

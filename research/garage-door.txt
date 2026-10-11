@@ -1,0 +1,28 @@
+{{Infobox-Item
+ | title             = Garage Door
+ | description       = A garage door that rolls up and down.
+ | shortname         =wall.frame.garagedoor 
+ | stacksize         = 1
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 30
+ | ingredients       = {{ItemCount|Metal Fragments|300}}{{ItemCount|Gears|2}}
+ | usedinitems       = No
+}}
+{{stub}}
+
+The '''Garage Door''' is a deployable structure that can be placed within a wall frame and works as a vertically opening door. The Garage Door doesn't have any wings and thus opening and closing does not require any extra space. It is highly resistant against bullet, melee and fire damage.
+
+== Crafting ==
+The Garage Door can be crafted using:
+* 300 [[Metal Fragments]]
+* 2 [[Gears|Gear]]
+
+== Notes ==
+Durability : 600 
+
+It takes 9 [[Satchel Charge]]s, or 150 [[Explosive 5.56 Rifle Ammo]], to destroy the garage door and has no weak side (like other doors) to explosives.
+
+{{ExperimentalItemsFooter}}
+[[Category:EXPLOSIVE AMMO]]

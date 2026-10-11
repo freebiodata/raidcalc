@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import { breadcrumbBlock } from '../lib/schema';
+import { DATA_SNAPSHOT } from '../data/raid-data';
+
+const title = 'Changelog – RaidCalc';
+const description =
+  'Dated changes to RaidCalc: dataset snapshots, new targets, corrections and features. Real updates only, newest first.';
+
+const crumbs = [{ name: 'Changelog' }];
+---
+<Base title={title} description={description} path="/changelog/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'Changelog', path: '/changelog/' }])]}
+>
+  <section class="page-head">
+    <div class="container prose">
+      <h1>Changelog</h1>
+      <p class="value-line">Dated, real updates to the tools and the dataset. Newest first.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2 style="margin-top:0">{DATA_SNAPSHOT} - initial release</h2>
+      <ul>
+        <li>Launched the three-tool pipeline: <a href="/raid-cost-calculator/">Raid Cost Calculator</a>, <a href="/cheapest-raid-solver/">Cheapest Raid Solver</a>, <a href="/sulfur-farming-calculator/">Sulfur Farming ETA</a>.</li>
+        <li>Published the static <a href="/raid-chart/">Rust raid chart</a> (walls, doors, deployables × C4, rockets, satchels, beancans, explosive ammo, MLRS, torch).</li>
+        <li>Verified dataset against Rust Wiki (Destruction chart, Building tiers, item recipes) and RustClash raid tables; documented both source conflicts (beancan vs armored door, explosive ammo vs stone wall) on the <a href="/methodology/">methodology page</a>.</li>
+        <li>Added soft-side awareness (explosive ammo and torch counts per side) and the <a href="/guides/soft-side-vs-hard-side/">soft side guide</a>.</li>
+        <li>18 dataset-pinning tests in CI: any future data change must re-verify against the published tables or fail the build.</li>
+      </ul>
+    </div>
+  </section>
+</Base>

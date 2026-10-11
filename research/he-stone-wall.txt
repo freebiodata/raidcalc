@@ -1,0 +1,43 @@
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+ | title             = High External Stone Wall
+ | description       = A high stone wall used to keep people off your property.
+ | shortname         = wall.external.high.stone
+ | stacksize         = 10
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 180
+ | ingredients       = {{ItemCount|Stones|1,500}}
+ | usedinitems       = No
+}}
+
+
+
+The High External Stone Wall is a defensive, deployable structure used to help keep intruders away from your base. It is great when used in a combination with other defensive structures. Although fairly expensive, the High External Stone Wall can be useful in repelling attacks against your buildings.
+
+The wall is about 4 meters tall and has 500 health. It can be destroyed to gain access to the next layer of defenses. One High External Stone Wall is about 2.5 meters in width, so in order to actually create a complete wall you may need to use dozens of these, or more depending on the area you want to secure.
+
+The wall cannot be removed or rotated using a hammer. The High External Stone Wall cannot be placed onto a foundation, and must be placed on solid, level terrain.
+
+It is not recommended to use this as a main defense for a home.
+
+High External Stone Walls will decay if not placed within a [[Tool Cupboard|Tool Cupboard's]] radius. It is therefor almost always necessary to build small "shacks" around the walls wherein a Cupboard is placed. 
+
+== Crafting ==
+The High External Stone Wall can be crafted with:
+* 1500 [[Stones]]
+
+'''Notes:'''
+* It takes 180 seconds to craft one stone wall. This is a long enough time that the wall crafting process can be started, other activities pursued, and then the wall canceled after they are complete. In this way, each building process can be used to temporarily store 1,500 stones.
+* The wall has a health of 500.
+* It takes 2 [[Timed Explosive Charge]] to break. Each charge will remove 275 health.
+* Wall decays (loses health) every 10 hours.
+* It takes about 1.5 stone to repair 1 health of the stone wall (the hammer repairs 51 health per hit, using 76 stone).
+* it takes 500 scrap to research
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Structure]]
+[[Category:Barricade]]
+[[Category:Deployable]]
+[[Category:Construction]]

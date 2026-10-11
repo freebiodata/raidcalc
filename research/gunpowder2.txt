@@ -1,0 +1,45 @@
+{{Infobox-Item
+ | title             = Gun Powder
+ | description       = Made from Sulphur and Charcoal.
+ | shortname         = gunpowder
+ | stacksize         = 1,000
+ | type              = Resources
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 2
+ | ingredients       = {{ItemCount|Charcoal|30}}{{ItemCount|Sulfur|20}}
+ | usedinitems       = Yes
+ | usedin            = {{ItemCount|Handmade Shell|}}{{ItemCount|Pistol Bullet|}}{{ItemCount|Incendiary Pistol Bullet|}}{{ItemCount|HV Pistol Ammo|}}{{ItemCount|5.56 Rifle Ammo|}}{{ItemCount|Explosive 5.56 Rifle Ammo|}}{{ItemCount|Incendiary 5.56 Rifle Ammo|}}{{ItemCount|HV 5.56 Rifle Ammo|}}{{ItemCount|Rocket|}}{{ItemCount|Incendiary Rocket|}}{{ItemCount|High Velocity Rocket|}}{{ItemCount|Smoke Rocket|}}{{ItemCount|12 Gauge Buckshot|}}{{ItemCount|12 Gauge Slug|}}{{ItemCount|Explosives|}}{{ItemCount|Beancan Grenade|}}{{ItemCount|F1 Grenade|}}{{ItemCount|Land Mine|}}{{ItemCount|Survey Charge|}}
+}}
+{{Template:LastUpdate|904.83}}
+
+Gunpowder is an essential crafting ingredient required for the production of weapon [[Ammunition]] and various types of [[Explosives]], such as [[Timed Explosive Charge]]s and [[Rocket]]s.
+
+== Crafting[[Category:Items]] ==
+Gun Powder can be crafted with:
+* 30 [[Charcoal]]
+* 20 [[Sulfur]]
+'''Notes:'''
+* It takes 2 seconds to craft and will produce 10 Gun Powder.
+
+== As a Crafting Ingredient ==
+
+=== Ammunition: ===
+[[12 Gauge Buckshot]] , [[12 Gauge Slug]] , [[5.56 Rifle Ammo]] , [[Explosive 5.56 Rifle Ammo]] , [[HV 5.56 Rifle Ammo]] , [[Incendiary 5.56 Rifle Ammo]] , [[Handmade Shell]] , [[Rocket]] , [[Incendiary Rocket]] , [[High Velocity Rocket]] , [[Smoke Rocket]]  , [[Incendiary Pistol Bullet]] , [[HV Pistol Ammo]].
+
+=== Resources: ===
+[[Explosives]]
+
+=== Tools: ===
+[[Survey Charge]]
+
+=== Traps: ===
+[[Land Mine]]
+
+=== Weapons: ===
+[[F1 Grenade]], [[Beancan Grenade]], 
+
+
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Metal fragments]]

@@ -1,0 +1,185 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import FAQ from '../../components/FAQ.astro';
+import { TARGETS, DATA_SNAPSHOT } from '../../data/raid-data';
+import { unitsFor, fmt, cheapestOptions } from '../../lib/raid';
+import { articleBlock, breadcrumbBlock } from '../../lib/schema';
+
+const title = 'Soft Siding in Rust – Soft vs Hard Side Guide | RaidCalc';
+const description =
+  'What soft siding means in Rust: the weak side takes more bullet and melee damage, cutting explosive ammo and torch counts. When it matters, with numbers.';
+
+const crumbs = [{ name: 'Guides' }, { name: 'Soft Side vs Hard Side' }];
+
+const stone = TARGETS.find((t) => t.id === 'stone-wall')!;
+const stoneHard = cheapestOptions('stone-wall', 'hard');
+const stoneSoft = cheapestOptions('stone-wall', 'soft');
+
+const faq = [
+  {
+    q: 'What is soft siding in Rust?',
+    a: `<p>Soft siding means attacking the <strong>weak face of a building block</strong> - the smooth side that normally faces indoors. Every building block has a strong side and a weak side: the weak side takes more damage from bullets, blades and fire, which can cut the cost of ammo- and torch-based raids dramatically.</p>`,
+  },
+  {
+    q: 'Which face is the weak side?',
+    a: `<p>The <strong>smooth face</strong>. When placing walls, the textured side should face outward - the wiki’s building page puts it directly: “the textured side is stronger than the smooth (inner side) of the wall”. Sheet metal is the exception people get wrong: place it so the crossbars face <em>inward</em> - that’s the weaker side.</p>`,
+  },
+  {
+    q: 'Does soft siding work with C4 and rockets?',
+    a: `<p><strong>No.</strong> Explosion damage is identical from both faces - C4, rockets, satchels and beancans don’t care which side they touch. Soft siding only changes bullet damage (so: explosive 5.56), melee (pickaxes, torches) and fire. That’s why the calculator’s side switch only affects ammo and torch counts.</p>`,
+  },
+  {
+    q: 'How much does soft siding actually save?',
+    a: `<p>For explosive ammo it’s roughly <strong>5–15%</strong>: a stone wall drops from 185 to 173 rounds (saves 300 sulfur), a wood wall from 49 to 44. For torches it’s ~10× - 97 hits on the weak face of a wood wall versus 962 on the strong face. For pickaxes the soft side is the difference between pickaxing being viable and a joke.</p>`,
+  },
+  {
+    q: 'How do I raid a soft side if walls face outward strong?',
+    a: `<p>Get inside something adjacent: twig up to an internal face, go through a roof, or hit an interior wall from a connected room. This is exactly what “soft-side pick” raids are - cheap sulfur, high risk, and the reason defenders seal roofs and build honeycombs.</p>`,
+  },
+];
+---
+<Base title={title} description={description} path="/guides/soft-side-vs-hard-side/" crumbs={crumbs}
+  jsonLd={[articleBlock('/guides/soft-side-vs-hard-side/', 'Soft Siding in Rust – Soft vs Hard Side Guide', description), breadcrumbBlock([{ name: 'Guides', path: '/guides/' }, { name: 'Soft Side vs Hard Side', path: '/guides/soft-side-vs-hard-side/' }])]}
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>Soft side vs hard side in Rust</h1>
+      <p class="value-line">
+        Every wall has a cheap face. Know which side takes the punishment, which explosives ignore it entirely, and
+        when soft siding turns a 20k-sulfur raid into a 4k one.
+      </p>
+      <p class="source-note" style="margin-top:8px">Updated {DATA_SNAPSHOT} · counts from the verified RaidCalc dataset · <a href="/methodology/">how we verify</a></p>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section">
+    <div class="container prose">
+      <h2 style="margin-top:0">Quick answer</h2>
+      <p>
+        <strong>The soft side is the smooth, inward-facing side of a wall, and it takes significantly more damage
+        from bullets, blades and fire.</strong> Explosive-only charges - C4, rockets, satchels, beancans - damage
+        both sides equally. So soft siding matters most for <strong>explosive ammo</strong> (modest savings) and
+        <strong>melee/fire methods</strong> like pickaxes and torches (the difference between impossible and easy).
+      </p>
+      <blockquote>
+        “Place your walls so the smooth face is facing inwards. The textured side is stronger than the smooth
+        (inner side) of the wall.” - <a href="https://rust.fandom.com/wiki/Building" rel="noopener" target="_blank">Rust Wiki, Building</a>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>The numbers: same wall, two faces</h2>
+      <p class="lede" style="color:var(--muted)">Stone wall (500 HP), priced both ways with the RaidCalc engine:</p>
+      <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin-top:14px">
+        <div class="panel">
+          <h3 class="panel-title"><Icon name="shield" /> Strong side (hard)</h3>
+          <div class="panel-pad">
+            {stoneHard.slice(0, 3).map((o, i) => (
+              <div class="rank-row" style={i === 0 ? '' : 'margin-top:8px'} class:list={[i === 0 && 'best']}>
+                <span class="rank-n">{i + 1}</span>
+                <span class="rank-count">{fmt(o.count)}×</span>
+                <span class="rank-sulfur">{fmt(o.sulfur)}</span>
+              </div>
+            ))}
+            <p class="help" style="margin-top:10px">185 explosive rounds · 10 satchels · 2 C4</p>
+          </div>
+        </div>
+        <div class="panel" style="border-color:var(--yellow-dim)">
+          <h3 class="panel-title" style="color:var(--yellow)"><Icon name="shield-off" /> Weak side (soft)</h3>
+          <div class="panel-pad">
+            {stoneSoft.slice(0, 3).map((o, i) => (
+              <div class="rank-row" style={i === 0 ? '' : 'margin-top:8px'} class:list={[i === 0 && 'best']}>
+                <span class="rank-n">{i + 1}</span>
+                <span class="rank-count">{fmt(o.count)}×</span>
+                <span class="rank-sulfur">{fmt(o.sulfur)}</span>
+              </div>
+            ))}
+            <p class="help" style="margin-top:10px">173 explosive rounds - 12 fewer, 300 sulfur saved. Satchels and C4: unchanged.</p>
+          </div>
+        </div>
+      </div>
+      <div class="table-wrap" style="margin-top:18px">
+        <table class="data">
+          <caption class="sr-only">Soft side vs hard side counts per target</caption>
+          <thead>
+            <tr><th>Method</th><th>Target</th><th class="num">Strong side</th><th class="num">Weak side</th><th>Sulfur saved</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Explosive ammo</td><td>Stone wall</td><td class="num">{unitsFor('stone-wall', 'ammo', 'hard')}</td><td class="num">{unitsFor('stone-wall', 'ammo', 'soft')}</td><td class="num">{fmt((unitsFor('stone-wall', 'ammo', 'hard')! - unitsFor('stone-wall', 'ammo', 'soft')!) * 25)}</td></tr>
+            <tr><td>Explosive ammo</td><td>Wood wall</td><td class="num">{unitsFor('wood-wall', 'ammo', 'hard')}</td><td class="num">{unitsFor('wood-wall', 'ammo', 'soft')}</td><td class="num">{fmt((unitsFor('wood-wall', 'ammo', 'hard')! - unitsFor('wood-wall', 'ammo', 'soft')!) * 25)}</td></tr>
+            <tr><td>Explosive ammo</td><td>Armored wall</td><td class="num">{unitsFor('armored-wall', 'ammo', 'hard')}</td><td class="num">{unitsFor('armored-wall', 'ammo', 'soft')}</td><td class="num">{fmt((unitsFor('armored-wall', 'ammo', 'hard')! - unitsFor('armored-wall', 'ammo', 'soft')!) * 25)}</td></tr>
+            <tr><td>Torch</td><td>Wood wall</td><td class="num">{unitsFor('wood-wall', 'torch', 'hard')}</td><td class="num">{unitsFor('wood-wall', 'torch', 'soft')}</td><td class="num">0 (torch = free)</td></tr>
+            <tr><td>Rockets (explosion)</td><td>Stone wall</td><td class="num">{unitsFor('stone-wall', 'rocket', 'hard')}</td><td class="num">{unitsFor('stone-wall', 'rocket', 'soft')}</td><td class="num">0 - no side effect</td></tr>
+            <tr><td>C4 (explosion)</td><td>Sheet metal wall</td><td class="num">{unitsFor('sheet-wall', 'c4', 'hard')}</td><td class="num">{unitsFor('sheet-wall', 'c4', 'soft')}</td><td class="num">0 - no side effect</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container prose">
+      <h2>Why the two sides exist</h2>
+      <p>
+        Rust models building blocks with a directional “face”: the side the builder could see and smooth is the
+        inside. The game multiplies incoming damage based on which face receives it - full value on the weak face,
+        reduced on the strong face. It’s the anti-“one rocket from outside” mechanic and the reason bases are
+        honeycombed: the more internal layers a raider must soft-side through, the more time they spend exposed.
+      </p>
+      <h2>How raiders actually use it</h2>
+      <ol>
+        <li><strong>Find an internal face.</strong> Roof down, twig-ramp to an upper floor, or punch through an adjacent room first - the soft side is wherever the defenders live.</li>
+        <li><strong>Pick the tool that respects sides.</strong> Explosive ammo for quiet work, jackhammer or pickaxes for pure metal savings, torches for the wood-wall meme (97 hits vs 962).</li>
+        <li><strong>Recompute before you commit.</strong> Flip the side switch in the <a href="/raid-cost-calculator/">raid cost calculator</a> and watch ammo counts drop - the solver ranks both scenarios.</li>
+      </ol>
+      <h2>Defending against soft-side raids</h2>
+      <ul>
+        <li><strong>Honeycomb</strong> - internal walls force the raider to eat multiple soft sides instead of one.</li>
+        <li><strong>Multi TC</strong> - deny twig ramps that would otherwise deliver raiders to your roof and upper floors.</li>
+        <li><strong>Metal or stone externals</strong> - woodexternals are a torch buffet; don’t build them if you can’t watch them.</li>
+        <li><strong>Seal roofs</strong> - most soft-side raids start from above, not from the door.</li>
+      </ul>
+      <h2>Common mistakes</h2>
+      <ul>
+        <li><strong>Placing sheet metal walls crossbars-out.</strong> Crossbars belong on the inside - that’s the weak face. The wiki is explicit about this one.</li>
+        <li><strong>Assuming rockets care about sides.</strong> They don’t. Save the risky soft-side play for ammo and melee.</li>
+        <li><strong>Soft-siding through honeycomb one wall at a time.</strong> Each layer is another 173 rounds; sometimes one rocket through the strong side of the outer shell is genuinely cheaper.</li>
+      </ul>
+      <p class="source-note">
+        Sources: <a href="https://rust.fandom.com/wiki/Building" rel="noopener" target="_blank">Rust Wiki - Building</a> (strong/weak face),
+        <a href="https://rust.fandom.com/wiki/Explosive_5.56_Rifle_Ammo" rel="noopener" target="_blank">Explosive 5.56 Rifle Ammo</a> (strong/weak demolition table),
+        RustClash raid tables (side-split counts). Verified {DATA_SNAPSHOT}.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Use the tools at the point of need</h2>
+      <div class="card-grid">
+        <a class="tool-card" href="/raid-cost-calculator/">
+          <h3><Icon name="calculator" /> Raid Cost Calculator</h3>
+          <p>Flip between strong and weak side and watch counts update live.</p>
+          <span class="tool-card-go">Try the side switch →</span>
+        </a>
+        <a class="tool-card" href="/cheapest-raid-solver/">
+          <h3><Icon name="route" /> Cheapest Raid Solver</h3>
+          <p>Both scenarios ranked, sulfur difference spelled out.</p>
+          <span class="tool-card-go">Rank both sides →</span>
+        </a>
+        <a class="tool-card" href="/raid-chart/">
+          <h3><Icon name="table-properties" /> Rust Raid Chart</h3>
+          <p>The full table with strong/weak ammo columns.</p>
+          <span class="tool-card-go">Open the chart →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <FAQ items={faq} />
+</Base>

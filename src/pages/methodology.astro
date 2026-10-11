@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { breadcrumbBlock } from '../lib/schema';
+import { DATA_SNAPSHOT } from '../data/raid-data';
+
+const title = 'Methodology & Sources – RaidCalc';
+const description =
+  'How RaidCalc computes raid costs: the ceil(HP ÷ damage) formula, sulfur recipe chain, cited sources and how we reconcile disagreements between them.';
+
+const crumbs = [{ name: 'Methodology & Sources' }];
+---
+<Base title={title} description={description} path="/methodology/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'Methodology & Sources', path: '/methodology/' }])]}
+>
+  <section class="page-head">
+    <div class="container prose">
+      <h1>Methodology &amp; sources</h1>
+      <p class="value-line">Exactly how the numbers are produced, where they come from, and what we do when sources disagree.</p>
+      <p class="source-note" style="margin-top:8px">Current data snapshot: <strong>{DATA_SNAPSHOT}</strong></p>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section">
+    <div class="container prose">
+      <h2 style="margin-top:0">The formulas</h2>
+      <p>
+        Three formulas run the entire site. If any page ever shows a number that doesn’t satisfy them, that’s a
+        bug - <a href="/contact/">please report it</a>.
+      </p>
+      <ol>
+        <li><strong>Units per target:</strong> <span class="mono">count = ceil(target HP ÷ damage per explosive)</span>. Damage values are per-explosive, per-structure. You always round up.</li>
+        <li><strong>Sulfur per line:</strong> <span class="mono">sulfur = count × sulfur per explosive</span>. Sulfur costs are computed from raw crafting recipes, not from hearsay.</li>
+        <li><strong>Farming ETA:</strong> <span class="mono">time = sulfur needed ÷ sulfur per minute</span>; nodes = sulfur ÷ 300; charcoal ≈ sulfur × 1.5 (gunpowder ratio 30 charcoal : 20 sulfur).</li>
+      </ol>
+      <p>
+        The one exception: torch counts are <em>tested hit counts</em>, not HP divisions - fire and melee damage vs
+        wood involves multipliers that don’t reduce to a clean per-hit number, so we store community-tested values
+        instead of deriving them.
+      </p>
+
+      <h2>The sulfur chain, reconciled</h2>
+      <p>Every sulfur figure traces to two base recipes (Rust Wiki item pages):</p>
+      <ul>
+        <li><strong>Gun Powder:</strong> 20 sulfur + 30 charcoal → 10 gun powder ⇒ <strong>2 sulfur per gun powder</strong></li>
+        <li><strong>Explosives:</strong> 50 gun powder + 10 sulfur + 3 low grade + 10 metal fragments ⇒ <strong>110 sulfur per Explosives</strong></li>
+      </ul>
+      <table class="data" style="max-width:760px">
+        <thead><tr><th>Explosive</th><th>Recipe</th><th class="num">Sulfur</th></tr></thead>
+        <tbody>
+          <tr><td>C4</td><td>20 Explosives + 5 cloth + 2 tech trash</td><td class="num">20 × 110 = 2,200</td></tr>
+          <tr><td>Rocket</td><td>2 pipes + 150 gun powder + 10 Explosives</td><td class="num">10 × 110 + 150 × 2 = 1,400</td></tr>
+          <tr><td>Satchel Charge</td><td>4 beancans + 1 rope + 1 small stash</td><td class="num">4 × 120 = 480</td></tr>
+          <tr><td>Beancan Grenade</td><td>60 gun powder + 20 metal fragments</td><td class="num">60 × 2 = 120</td></tr>
+          <tr><td>Explosive 5.56</td><td>per 2 rounds: 20 gun powder + 10 sulfur + 10 metal frags</td><td class="num">25 per round</td></tr>
+          <tr><td>MLRS Rocket</td><td>Not craftable - looted from APC/heli/elite crates</td><td class="num">n/a</td></tr>
+        </tbody>
+      </table>
+      <p>
+        Workbench gates follow the crafting requirements: C4 and rockets require a <strong>Tier 3</strong> workbench;
+        satchels, beancans and explosive ammo require <strong>Tier 1</strong>.
+      </p>
+
+      <h2>Sources</h2>
+      <ul>
+        <li>
+          <strong>Rust Wiki (Fandom)</strong> - tier HP values (Building page), the Destruction raid chart (per-item
+          damage and minimum quantities), crafting recipes and raw sulfur for each explosive, explosive ammo’s
+          strong/weak side demolition table, sulfur node yield (300 ore → 300 sulfur), TC 100 HP, satchel malfunction
+          note.
+          <br /><span class="source-note">rust.fandom.com - pages: Building, Destruction, Timed Explosive Charge, Rocket, Satchel Charge, Beancan Grenade, Explosives, Gun Powder, Explosive 5.56 Rifle Ammo, MLRS, Sulfur Ore, Tool Cupboard, Auto Turret</span>
+        </li>
+        <li>
+          <strong>RustClash wiki (successor of Rustlabs)</strong> - per-target raid tables used to cross-check every
+          count and sulfur figure, plus deployable values the Fandom chart doesn’t list (turret, SAM site, TC, ladder
+          hatch).
+          <br /><span class="source-note">wiki.rustclash.com - stone/wood/metal/armored wall, all doors, tool-cupboard, auto-turret, sam-site, high-external walls, ladder-hatch</span>
+        </li>
+      </ul>
+
+      <h2>When sources disagree</h2>
+      <p>
+        Two conflicts existed at snapshot time. In both cases we kept the value whose internal math is
+        self-consistent (<span class="mono">damage × (count − 1) &lt; HP ≤ damage × count</span>) and which comes
+        from the more actively maintained dataset:
+      </p>
+      <table class="data" style="max-width:860px">
+        <thead><tr><th>Cell</th><th class="num">Fandom Destruction</th><th class="num">RustClash</th><th class="num">Used</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Beancan vs armored door</td><td class="num">56</td><td class="num">69</td><td class="num">69</td>
+            <td>Fandom’s own damage table (14.5 dmg) gives ceil(1000 ÷ 14.5) = 69 - its count table is stale.</td>
+          </tr>
+          <tr>
+            <td>Explosive ammo vs stone wall</td><td class="num">127</td><td class="num">185 (hard) / 173 (soft)</td><td class="num">185 / 173</td>
+            <td>RustClash’s per-round damage (2.704 hard / 2.904 soft) reproduces 185/173 exactly; 127 matches no damage value in either source.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Known limits of the data</h2>
+      <ul>
+        <li>Counts are lab-condition minimums: point-blank placement, every charge detonates, no splash falloff.</li>
+        <li>Satchel malfunction chance is documented qualitatively by the wiki - we don’t add a numeric buffer.</li>
+        <li>Server mods and raw-rework changes are out of scope; this is vanilla data.</li>
+        <li>Facepunch rebalances regularly. A count that mismatches your in-game test may mean a patch landed - tell us and we’ll re-verify.</li>
+      </ul>
+
+      <h2>Review & update process</h2>
+      <ul>
+        <li><strong>Verification:</strong> after every Rust force-wipe cycle with balance notes, and at minimum quarterly, we re-pull the source pages and re-run the site’s dataset tests (18 assertions pinning every published count).</li>
+        <li><strong>Corrections:</strong> reader reports are checked against both sources; accepted corrections ship with a <a href="/changelog/">changelog</a> entry and a fresh snapshot date.</li>
+        <li><strong>AI disclosure:</strong> page copy is drafted with AI assistance and reviewed by the maintainers against the dataset before publishing; no number on this site is AI-generated - all values come from the cited tables and the test-pinned dataset.</li>
+        <li><strong>Independence:</strong> no ads, affiliates or sponsorships; nothing on this site is paid placement.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="note-box orange">
+        <Icon name="mail" />
+        <span>Spotted an error? Send the target, the explosive and your test result to <a href="/contact/">the contact page</a> - corrections are public and dated.</span>
+      </div>
+    </div>
+  </section>
+</Base>

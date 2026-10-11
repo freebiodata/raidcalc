@@ -1,0 +1,255 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import { TARGETS, EXPLOSIVES, DAMAGE, DATA_SNAPSHOT } from '../data/raid-data';
+import { unitsFor, fmt } from '../lib/raid';
+import { articleBlock, breadcrumbBlock } from '../lib/schema';
+
+const title = 'Rust Raid Chart – Explosives for Walls & Doors | RaidCalc';
+const description =
+  'Complete Rust raid chart: C4, rockets, satchels, beancans, explosive ammo and MLRS needed for every wall, door and deployable - with sulfur per target.';
+
+const crumbs = [{ name: 'Rust Raid Chart' }];
+
+const wallTargets = TARGETS.filter((t) => t.category === 'walls');
+const doorTargets = TARGETS.filter((t) => t.category === 'doors');
+const depTargets = TARGETS.filter((t) => t.category === 'deployables');
+const explosives = EXPLOSIVES.filter((e) => e.id !== 'torch');
+
+function count(id: string, exId: string): string {
+  const n = unitsFor(id, exId, 'hard');
+  return n == null ? '-' : String(n);
+}
+function ammoCell(id: string): string {
+  const hard = unitsFor(id, 'ammo', 'hard');
+  const soft = unitsFor(id, 'ammo', 'soft');
+  if (hard == null) return '-';
+  return soft != null && soft !== hard ? `${hard} / ${soft}` : String(hard);
+}
+function sulfurCell(id: string): string {
+  const opts = EXPLOSIVES.filter((e) => e.sulfur != null && e.id !== 'torch')
+    .map((e) => ({ s: unitsFor(id, e.id, 'hard')! * (e.sulfur ?? 0), n: unitsFor(id, e.id, 'hard')!, id: e.id }))
+    .sort((a, b) => a.s - b.s);
+  const best = opts[0];
+  return `${fmt(best.s)} (${best.n}× ${EXPLOSIVES.find((e) => e.id === best.id)!.short})`;
+}
+
+const faq = [
+  {
+    q: 'How many rockets for an armored wall?',
+    a: `<p><strong>15 rockets</strong> = 21,000 sulfur. An armored wall has 2,000 HP and takes 137.575 rocket damage: 15 × 137.575 = 2,063 ≥ 2,000, while 14 rockets leave it standing with 74 HP.</p>`,
+  },
+  {
+    q: 'How many rockets for a sheet metal door?',
+    a: `<p><strong>2 rockets</strong> (250 HP ÷ 220.375 = 1.13 → 2) = 2,800 sulfur. It’s the classic opener. Cheaper on paper: 63 explosive rounds = 1,575 sulfur, or 4 satchels = 1,920.</p>`,
+  },
+  {
+    q: 'How many satchels for a garage door?',
+    a: `<p><strong>9 satchels</strong> = 4,320 sulfur (600 HP ÷ 70). Explosive ammo needs 150 rounds (3,750 sulfur) - cheaper in sulfur if you have a rifle and the time.</p>`,
+  },
+  {
+    q: 'What breaks a tool cupboard fastest?',
+    a: `<p>Any single explosive: 1 C4, 1 rocket, 1 satchel or even 4 beancans (TC has 100 HP). Cheapest: 10 explosive rounds. Most raiders just melee it or use whatever they’re carrying.</p>`,
+  },
+  {
+    q: 'Why do explosive ammo cells show two numbers?',
+    a: `<p>Format is <strong>strong side / weak side</strong>. Explosive rounds deal bullet damage too, and bullets bite harder into the weak face of walls - 173 vs 185 rounds on a stone wall. Explosion-only charges don’t care about side.</p>`,
+  },
+];
+---
+<Base title={title} description={description} path="/raid-chart/" crumbs={crumbs}
+  jsonLd={[articleBlock('/raid-chart/', 'Rust Raid Chart – Explosives for Walls & Doors', description), breadcrumbBlock([{ name: 'Rust Raid Chart', path: '/raid-chart/' }])]}
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>Rust Raid Chart</h1>
+      <p class="value-line">
+        Every target × every explosive: minimum units to destroy, sulfur per charge, and the cheapest route per
+        target. Counts are <span class="mono">ceil(HP ÷ damage)</span> from verified wiki data - this page is static,
+        printable and citable.
+      </p>
+      <p class="source-note" style="margin-top:8px">Data snapshot {DATA_SNAPSHOT} · ammo column = strong side / weak side · sources: <a href="/methodology/">methodology page</a></p>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section" id="walls">
+    <div class="container">
+      <h2 style="margin-top:0"><Icon name="shield" class="inline-icon" /> Walls</h2>
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Target</th><th class="num">HP</th>
+              <th class="num">C4</th><th class="num">Rockets</th><th class="num">Satchels</th>
+              <th class="num">Beancans</th><th class="num">Explo ammo S/W</th><th class="num">MLRS</th>
+              <th class="num">Cheapest (sulfur)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {wallTargets.map((t) => (
+              <tr>
+                <td><b>{t.name}</b></td>
+                <td class="num">{fmt(t.hp)}</td>
+                <td class="num">{count(t.id, 'c4')}</td>
+                <td class="num">{count(t.id, 'rocket')}</td>
+                <td class="num">{count(t.id, 'satchel')}</td>
+                <td class="num">{count(t.id, 'beancan')}</td>
+                <td class="num">{ammoCell(t.id)}</td>
+                <td class="num">{count(t.id, 'mlrs')}</td>
+                <td class="num hl">{sulfurCell(t.id)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note" style="margin-top:8px">Torch method (wood only): {unitsFor('wood-wall', 'torch', 'soft')} hits on the weak side of a wood wall, {unitsFor('wood-wall', 'torch', 'hard')} on the strong side, {unitsFor('he-wood-wall', 'torch', 'soft')} for a high external wood wall. Zero sulfur, maximum commitment.</p>
+    </div>
+  </section>
+
+  <section class="section" id="doors" style="padding-top:0">
+    <div class="container">
+      <h2><Icon name="door-closed" class="inline-icon" /> Doors &amp; hatches</h2>
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Target</th><th class="num">HP</th>
+              <th class="num">C4</th><th class="num">Rockets</th><th class="num">Satchels</th>
+              <th class="num">Beancans</th><th class="num">Explo ammo</th><th class="num">MLRS</th>
+              <th class="num">Cheapest (sulfur)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[...doorTargets, TARGETS.find((t) => t.id === 'ladder-hatch')!].map((t) => (
+              <tr>
+                <td><b>{t.name}</b></td>
+                <td class="num">{fmt(t.hp)}</td>
+                <td class="num">{count(t.id, 'c4')}</td>
+                <td class="num">{count(t.id, 'rocket')}</td>
+                <td class="num">{count(t.id, 'satchel')}</td>
+                <td class="num">{count(t.id, 'beancan')}</td>
+                <td class="num">{ammoCell(t.id)}</td>
+                <td class="num">{count(t.id, 'mlrs')}</td>
+                <td class="num hl">{sulfurCell(t.id)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="deployables" style="padding-top:0">
+    <div class="container">
+      <h2><Icon name="lock-keyhole" class="inline-icon" /> Deployables</h2>
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr>
+              <th>Target</th><th class="num">HP</th>
+              <th class="num">C4</th><th class="num">Rockets</th><th class="num">Satchels</th>
+              <th class="num">Beancans</th><th class="num">Explo ammo</th><th class="num">MLRS</th>
+              <th class="num">Cheapest (sulfur)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {depTargets.map((t) => (
+              <tr>
+                <td><b>{t.name}</b></td>
+                <td class="num">{fmt(t.hp)}</td>
+                <td class="num">{count(t.id, 'c4')}</td>
+                <td class="num">{count(t.id, 'rocket')}</td>
+                <td class="num">{count(t.id, 'satchel')}</td>
+                <td class="num">{count(t.id, 'beancan')}</td>
+                <td class="num">{ammoCell(t.id)}</td>
+                <td class="num">{count(t.id, 'mlrs')}</td>
+                <td class="num hl">{sulfurCell(t.id)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="explosive-costs">
+    <div class="container">
+      <h2>What each explosive costs to craft</h2>
+      <div class="table-wrap">
+        <table class="data">
+          <thead>
+            <tr><th>Explosive</th><th class="num">Sulfur each</th><th>Bench</th><th>Recipe</th></tr>
+          </thead>
+          <tbody>
+            {EXPLOSIVES.filter((e) => e.id !== 'torch').map((e) => (
+              <tr>
+                <td><b>{e.name}</b></td>
+                <td class="num">{e.sulfur == null ? 'n/a*' : fmt(e.sulfur)}</td>
+                <td>{e.bench > 0 ? `Tier ${e.bench}` : e.id === 'mlrs' ? '-' : 'None'}</td>
+                <td style="color:var(--ink-soft);font-size:0.88rem">{e.recipe}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note" style="margin-top:8px">
+        *MLRS rockets are not craftable - they’re looted (APC, heli, elite crates) and fired from the Launch Site MLRS.
+        Torch: 1 wood + 1 cloth, zero sulfur.
+        Recipe chain: 1 Explosives = 50 gun powder + 10 sulfur + 3 low grade + 10 metal frags = 110 sulfur;
+        gun powder = 20 sulfur + 30 charcoal per 10.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container prose">
+      <h2>How to read this chart</h2>
+      <p>
+        Counts are minimums: <span class="mono">ceil(target HP ÷ damage per explosive)</span>. A partially damaged
+        wall still blocks, so you always round up. Sulfur figures use raw crafting cost per explosive - the full
+        ingredient chains are on the <a href="/methodology/">methodology page</a>.
+      </p>
+      <div class="note-box">
+        <Icon name="triangle-alert" />
+        <span><strong>Satchel caveat:</strong> the wiki documents a malfunction chance and a random fuse. Veterans carry ~20% extra. Beancan counts assume right-click “stuck” placement for full damage.</span>
+      </div>
+      <p>
+        Found a count that doesn’t match your in-game test? <a href="/contact/">Report it</a> - charts rot when the
+        game patches, and we’d rather be corrected than confident.
+      </p>
+    </div>
+  </section>
+
+  <FAQ items={faq} />
+
+  <section class="section">
+    <div class="container">
+      <h2>Put the chart to work</h2>
+      <div class="card-grid">
+        <a class="tool-card" href="/raid-cost-calculator/">
+          <h3><Icon name="calculator" /> Raid Cost Calculator</h3>
+          <p>Instead of reading one row, price your whole target list with quantities.</p>
+          <span class="tool-card-go">Price a raid →</span>
+        </a>
+        <a class="tool-card" href="/cheapest-raid-solver/">
+          <h3><Icon name="route" /> Cheapest Raid Solver</h3>
+          <p>The “cheapest sulfur” column, computed live for your exact plan.</p>
+          <span class="tool-card-go">Rank my raid →</span>
+        </a>
+        <a class="tool-card" href="/guides/soft-side-vs-hard-side/">
+          <h3><Icon name="flip-horizontal" /> Soft Side vs Hard Side</h3>
+          <p>Why the ammo column shows two numbers - and when it halves your cost.</p>
+          <span class="tool-card-go">Learn the trick →</span>
+        </a>
+        <a class="tool-card" href="/sulfur-farming-calculator/">
+          <h3><Icon name="pickaxe" /> Sulfur Farming ETA</h3>
+          <p>Convert any sulfur figure on this page into farming time.</p>
+          <span class="tool-card-go">Time the grind →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

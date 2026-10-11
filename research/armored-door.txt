@@ -1,0 +1,40 @@
+Notes: it takes 3 C4 to break an armored door
+
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+ | title             = Armored Door
+ | description       = A hinged door which is made out of reinforced metal and wood
+ | shortname         = door.hinged.toptier
+ | stacksize         = 1
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 30
+ | ingredients       = {{ItemCount|High Quality Metal|20}}{{ItemCount|Gears|5}}
+ | usedinitems       = No
+}}
+
+The '''Armored Door''' is a hinged door which is made out of [http://rust.wikia.com/wiki/High_Quality_Metal High Quality Metal] and [http://rust.wikia.com/wiki/Gears Gears]. It is placed in an empty doorway. It can then be locked with a [[Lock]] or [[Code Lock]].
+
+The Armored Door is the strongest and most damage resilient of all the doors. It can withstand heavy bullet fire, attacks from any tool, or even 2 blasts from [[Timed Explosive Charge|Timed Explosive Charges]]. The Armored Door has 800 health and takes 2 charges to destroy. The Armored Door can be placed by crafting it and selecting the door in your hotbar, and then mousing over an empty doorway. A blue silhouette of the door will appear, and you can left-click to place it. If the silhouette of the door is red, it cannot be placed in its current location (so the same as any other door). To Repair the Armored door you will need High Quality Metal.
+
+Having an Armored Door at the main entrance to your base can be a good deterrent against would-be raiders.
+
+Can also open the hactch to look
+
+== Crafting ==
+The Armored Door can be crafted with:
+* 20 [[High Quality Metal]]
+* 5 [[Gears]]
+It takes 30 seconds to craft a single door.
+
+== Skins ==
+{{:Armored Door/Skins}}
+
+
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Experimental Content]]
+[[Category:Deployable]]
+[[Category:Door]]
+[[Category:Construction]]

@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import { breadcrumbBlock } from '../lib/schema';
+
+const title = 'Terms of Use – RaidCalc';
+const description =
+  'Terms for using RaidCalc: free-to-use calculators provided as-is, no warranties on game data, trademark notice for Rust and Facepunch Studios.';
+
+const crumbs = [{ name: 'Terms' }];
+const updated = '2026-10-11';
+---
+<Base title={title} description={description} path="/terms/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'Terms', path: '/terms/' }])]}
+>
+  <section class="page-head">
+    <div class="container prose">
+      <h1>Terms of use</h1>
+      <p class="value-line">Free tools, provided honestly and used at your own risk.</p>
+      <p class="source-note" style="margin-top:8px">Last updated: {updated}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2 style="margin-top:0">1. What this is</h2>
+      <p>
+        RaidCalc provides free, browser-based calculators for the video game Rust. The tools estimate explosive
+        counts, sulfur costs and farming time from community-verified game data.
+      </p>
+
+      <h2>2. No warranty</h2>
+      <p>
+        The site and its data are provided “as is”, without warranty of any kind. Game balance changes without
+        notice; published sources can be stale; math can have bugs. Verify critical counts in game before you
+        commit a raid’s worth of sulfur. We are not liable for lost loot, lost time or lost dignity.
+      </p>
+
+      <h2>3. Acceptable use</h2>
+      <p>
+        Use the site freely, including for your community content - linking is appreciated, scraping whole tables
+        is fine too if you cite the source pages. Don’t attempt to disrupt the service or republish the site as
+        your own.
+      </p>
+
+      <h2>4. Trademarks</h2>
+      <p>
+        Rust is a trademark of Facepunch Studios. RaidCalc is an independent fan project and is not affiliated
+        with, endorsed by or sponsored by Facepunch Studios. All game names, icons and assets referenced on this
+        site belong to their respective owners.
+      </p>
+
+      <h2>5. Changes</h2>
+      <p>These terms may change; material updates are dated at the top and noted in the <a href="/changelog/">changelog</a>.</p>
+
+      <h2>6. Contact</h2>
+      <p>Questions about these terms: <a href="mailto:hello@raidcalc.top" class="mono">hello@raidcalc.top</a>.</p>
+    </div>
+  </section>
+</Base>

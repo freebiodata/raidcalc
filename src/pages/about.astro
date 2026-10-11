@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { breadcrumbBlock } from '../lib/schema';
+import { DATA_SNAPSHOT } from '../data/raid-data';
+
+const title = 'About RaidCalc – Free Rust Raid Calculators';
+const description =
+  'Who builds RaidCalc, why it exists, and how the Rust raid calculators make money (they don’t). Independent fan tool, not affiliated with Facepunch Studios.';
+
+const crumbs = [{ name: 'About' }];
+---
+<Base title={title} description={description} path="/about/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'About', path: '/about/' }])]}
+>
+  <section class="page-head">
+    <div class="container prose">
+      <h1>About RaidCalc</h1>
+      <p class="value-line">A free, independent toolkit for Rust raiders - built to make raid costs honest, checkable and fast to look up.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2 style="margin-top:0">Why this site exists</h2>
+      <p>
+        Every Rust raider asks the same three questions: <em>what will it cost, what’s the cheapest way, and how
+        long will the sulfur take?</em> The answers exist - scattered across wiki charts, Discord pins and
+        spreadsheet folklore - and they quietly rot every time the game patches.
+      </p>
+      <p>
+        RaidCalc puts the three answers in one pipeline. The math is deliberately boring - 
+        <span class="mono">ceil(HP ÷ damage)</span> and <span class="mono">count × sulfur</span> - because boring
+        math can be checked. Every dataset value cites its source, every reconciliation between disagreeing
+        sources is documented, and the snapshot date tells you exactly how fresh the numbers are.
+      </p>
+
+      <h2>Who makes it</h2>
+      <p>
+        RaidCalc is built and maintained by a small team of long-time Rust players and web developers. We don’t
+        publish personas or invented credentials - what we publish instead is <strong>method</strong>: every number
+        on this site traces to a cited source, and the full reasoning lives on the
+        <a href="/methodology/">methodology page</a>. When a count is disputed or stale, we say so on the page
+        rather than smoothing it over.
+      </p>
+
+      <h2>How it’s paid for</h2>
+      <p>
+        It isn’t. No ads, no affiliate links, no paywall, no account system. The tools run entirely in your
+        browser; your raid plans are stored in your device’s local storage and are never uploaded. Hosting is a
+        fixed cost we cover because we wanted the tool to exist.
+      </p>
+
+      <h2>Relationship with Facepunch</h2>
+      <p>
+        RaidCalc is an unofficial fan project. It is not affiliated with, endorsed by, or sponsored by Facepunch
+        Studios. Rust is a trademark of Facepunch Studios. Game data belongs to Facepunch; the charts we build
+        from community-verified tables cite their sources.
+      </p>
+
+      <h2>Talk to us</h2>
+      <p>
+        Wrong number? Missing target? Feature idea? <a href="/contact/">Contact us</a> - corrections get checked
+        against the sources and, when accepted, shipped with a changelog entry.
+      </p>
+      <p class="source-note">Data snapshot {DATA_SNAPSHOT} · <a href="/changelog/">changelog</a></p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <h2>What’s on the site</h2>
+      <div class="card-grid">
+        <a class="tool-card" href="/raid-cost-calculator/">
+          <h3><Icon name="calculator" /> Raid Cost Calculator</h3>
+          <p>Explosive counts and sulfur bills for any target list.</p>
+        </a>
+        <a class="tool-card" href="/cheapest-raid-solver/">
+          <h3><Icon name="route" /> Cheapest Raid Solver</h3>
+          <p>Every route ranked by sulfur, workbench tiers flagged.</p>
+        </a>
+        <a class="tool-card" href="/sulfur-farming-calculator/">
+          <h3><Icon name="pickaxe" /> Sulfur Farming ETA</h3>
+          <p>Grind time, node counts and charcoal for your raid.</p>
+        </a>
+        <a class="tool-card" href="/raid-chart/">
+          <h3><Icon name="table-properties" /> Rust Raid Chart</h3>
+          <p>The whole explosive table, static and citable.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

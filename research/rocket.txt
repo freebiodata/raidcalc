@@ -1,0 +1,92 @@
+{{Infobox-Item
+| title = Rocket
+| description = Ammunition for a type of ammo used in the [[Rocket Launcher]].
+| shortname = ammo.rocket.basic
+| stacksize = 3
+| type = Explosive
+| canbethrown = No
+| craftable = Yes
+| knowndefault = No
+| crafttime = 30
+| ingredients = {{ItemCount|Metal Pipe|2}}{{ItemCount|Gun Powder|600}}{{ItemCount|Explosives|10}}
+| usedinitems = No
+}}{{Template:LastUpdate|904.83}}
+
+A craftable type of ammo used in the [[Rocket Launcher]].
+
+== Damage and function times ==
+{{Infobox-Damage
+ | ItemModTimedExplosive = true
+ | Explosion         = 275
+ | Blunt             = 75
+ | canStick          = False
+ | explosionRadius   = 7.8
+ | explosionForward  = False
+ | minExplosionRadius= 1.0
+ | onlyDamageParent  = False
+ | timerAmountMax    = 10.0
+ | timerAmountMin    = 8.0
+ | totalDamage       = 350.0
+ | ItemModProjectileServerProjectile = true
+ | drag              = 0.0
+ | gravModifier      = 0.25
+ | scanRange         = 0.0
+ | speed             = 18.0
+}}
+{{clr}}
+
+== Researching ==
+The Rocket Blueprint can be researched with:
+* 125 [[Scrap]]
+== Damage ==
+The number of rockets to kill a player with or without any type of armor is:
+* Far off rocket splash damage: 2 Rockets
+* Close to target splash damage: 1 Rocket
+* Direct hit at any range: 1 Rocket
+
+== Damage table  ==
+{{:Destruction}}
+
+== Resource Breakdown ==
+A Rocket can be crafted with:
+
+* 10 Explosives
+* 150 Gunpowder
+* 2 Metal Pipes
+
+The raw materials required for crafting a Rocket from scratch are:
+
+* 1400 Sulfur
+* 1950 Charcoal
+* 100 Metal Fragments
+* 30 Low Grade Fuel
+* 2 Metal Pipes
+
+== Recycling ==
+{{Clr}}When placed in a Recycler, Rockets will yield:
+* 1 [http://rust.wikia.com/wiki/Metal_Pipe Metal Pipe]
+* 75 [http://rust.wikia.com/wiki/Gun_Powder Gun Powder]
+* 5 [http://rust.wikia.com/wiki/Explosives Explosives]
+
+== Trivia ==
+* Note: There are three different types of rockets:
+** The [[Incendiary Rocket]], painted red, and has the capability to cause fires to buildings/players.
+** The [[High Velocity Rocket]], that has increased range/accuracy, however, does 40% less damage to buildings (75 damage).
+
+* All rockets laying on the ground share the same view model.
+* Rockets will not explode unless fired from a Rocket Launcher.
+* The [[Smoke Rocket]] is no longer available in vanilla rust. It created a thick cloud of smoke to blind enemies, for gaining ground on offense or gaining time on defense.
+
+== Gallery ==
+<gallery>
+Rocket.png|In-game view of the Rocket.
+Rocket_HD_Left.jpg|Rocket Model HD render (left).
+Rocker_HD_Right.jpg|Rocket Model HD render (right).
+</gallery>
+[[Category:Items]]
+[[Category:Ammunition]]
+[[Category:Experimental Content]]
+[[Category:Rocket]]
+[[Category:Explosives]]
+[[Category:Weapon Mods]]
+[[Category:Disambiguations]]{{ExperimentalItemsFooter}}

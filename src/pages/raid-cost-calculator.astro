@@ -1,0 +1,520 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import { TARGETS, EXPLOSIVES, DAMAGE, DATA_SNAPSHOT } from '../data/raid-data';
+import { unitsFor, fmt } from '../lib/raid';
+import { webAppBlock, breadcrumbBlock } from '../lib/schema';
+import * as lucide from 'lucide-static';
+
+const title = 'Rust Raid Calculator – C4, Rocket & Sulfur Costs | RaidCalc';
+const description =
+  'Free Rust raid calculator. Pick walls, doors, turrets or a TC and see the C4, rockets, satchels, beancans or explosive ammo needed - with the total sulfur cost.';
+
+const ICON_NAMES: Record<string, string> = {
+  'wood-wall': 'fence', 'stone-wall': 'mountain', 'sheet-wall': 'layers', 'armored-wall': 'shield',
+  'wood-door': 'door-open', 'sheet-door': 'door-closed', 'sheet-double-door': 'door-closed',
+  'garage-door': 'warehouse', 'armored-door': 'door-closed', 'ladder-hatch': 'grab',
+  'he-wood-wall': 'fence', 'he-stone-wall': 'mountain', tc: 'lock-keyhole', 'auto-turret': 'crosshair', 'sam-site': 'radar',
+};
+
+// client payload - includes the exact lucide SVGs the picker renders client-side
+const toPascal = (s: string) => s.split('-').map((p) => p[0].toUpperCase() + p.slice(1)).join('');
+const lucideIcons = lucide as unknown as Record<string, string>;
+const iconSet: Record<string, string> = {};
+for (const lucideName of [...new Set(Object.values(ICON_NAMES))]) {
+  const svg = lucideIcons[toPascal(lucideName)];
+  if (svg) iconSet[lucideName] = svg.replace(/width="24"/, 'width="{S}"').replace(/height="24"/, 'height="{S}"');
+}
+
+const payload = {
+  targets: TARGETS.map((t) => ({ id: t.id, name: t.name, short: t.short, hp: t.hp, wood: !!t.wood, cat: t.category, note: t.note ?? null })),
+  explosives: EXPLOSIVES.map((e) => ({ id: e.id, name: e.name, short: e.short, sulfur: e.sulfur, bench: e.bench, kind: e.kind })),
+  damage: DAMAGE,
+  icons: iconSet,
+  iconFor: ICON_NAMES,
+};
+
+// server-rendered example (same engine as the tool)
+const exRocket = unitsFor('sheet-door', 'rocket');
+const exAmmo = unitsFor('sheet-door', 'ammo');
+const exSatchel = unitsFor('sheet-door', 'satchel');
+
+const crumbs = [{ name: 'Raid Cost Calculator' }];
+
+const faq = [
+  {
+    q: 'How many rockets for an armored wall?',
+    a: `<p><strong>15 rockets</strong> destroy an armored wall (2,000 HP ÷ 137.575 rocket damage, rounded up). That costs <strong>21,000 sulfur</strong> at 1,400 sulfur per rocket.</p>`,
+  },
+  {
+    q: 'How many C4 for a sheet metal door?',
+    a: `<p><strong>One C4</strong> opens a sheet metal door (440 damage vs 250 HP). A garage door needs 2, an armored door needs 3 - which is why raiders save C4 for walls and use cheaper door-openers.</p>`,
+  },
+  {
+    q: 'How much sulfur for a stone wall?',
+    a: `<p>On pure sulfur the cheapest route is <strong>2 C4 = 4,400 sulfur</strong>, but C4 needs a Tier 3 workbench. The practical alternatives: <strong>185 explosive rounds = 4,625 sulfur</strong> (4,325 from the soft side) or <strong>10 satchels = 4,800 sulfur</strong>. The <a href="/cheapest-raid-solver/">cheapest raid solver</a> ranks every option for your exact plan.</p>`,
+  },
+  {
+    q: 'How much sulfur per rocket, C4, satchel and beancan?',
+    a: `<p>Rocket = <strong>1,400 sulfur</strong> · C4 = <strong>2,200 sulfur</strong> · Satchel Charge = <strong>480 sulfur</strong> · Beancan Grenade = <strong>120 sulfur</strong> · Explosive 5.56 round = <strong>25 sulfur</strong>. Every number comes straight from the crafting recipes - the reconciliation is shown on the <a href="/methodology/">methodology page</a>.</p>`,
+  },
+  {
+    q: 'Does the calculator include workbench requirements?',
+    a: `<p>Yes. C4 and rockets are flagged Tier 3, satchels, beancans and explosive ammo Tier 1, torches need no bench. Counts don’t change between offline and online raids - only your risk does.</p>`,
+  },
+  {
+    q: 'Why does the plan warn about satchel duds?',
+    a: `<p>Satchel charges arm with a random fuse and have a small chance to malfunction, per the <a href="https://rust.fandom.com/wiki/Satchel_Charge" rel="noopener" target="_blank">Rust Wiki</a>. The calculator shows exact minimums; raiders commonly carry ~20% extra satchels as insurance. We keep the math at minimums and let you choose the buffer.</p>`,
+  },
+];
+---
+<Base title={title} description={description} path="/raid-cost-calculator/" crumbs={crumbs}
+  jsonLd={[webAppBlock('/raid-cost-calculator/', 'Rust Raid Cost Calculator', description), breadcrumbBlock([{ name: 'Raid Cost Calculator', path: '/raid-cost-calculator/' }])]}
+>
+  <section class="hero">
+    <div class="container">
+      <span class="kicker"><Icon name="bomb" size={13} /> Tool 01 · Raid cost</span>
+      <h1>Rust Raid Calculator</h1>
+      <p class="value-line">
+        Pick what you want to break - walls, doors, garage doors, tool cupboard, turrets - and get the exact
+        C4, rockets, satchels, beancans, explosive ammo or torches needed, plus the total sulfur cost.
+      </p>
+      <div class="trust-microline">
+        <span><Icon name="check" size={14} /> Free, no sign-up</span>
+        <span><Icon name="check" size={14} /> Runs in your browser - nothing you plan is uploaded</span>
+        <span><Icon name="check" size={14} /> Verified against published raid tables ({DATA_SNAPSHOT})</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section" style="padding-top:22px">
+    <div class="container tool-layout stacked-right">
+      <div>
+        <div class="panel">
+          <h2 class="panel-title"><Icon name="hammer" /> 1 · Pick your targets</h2>
+          <div class="panel-pad">
+            <div class="field">
+              <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
+                <span class="big-num-label" id="side-label">Wall side</span>
+                <div class="seg" role="group" aria-labelledby="side-label">
+                  <button type="button" data-side="hard" aria-pressed="true">Strong side</button>
+                  <button type="button" data-side="soft" aria-pressed="false">Weak (soft) side</button>
+                </div>
+                <span class="help" style="color:var(--muted);font-size:0.78rem">Only changes explosive ammo &amp; torch counts - <a href="/guides/soft-side-vs-hard-side/">why?</a></span>
+              </div>
+              <div id="picker"></div>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button type="button" class="btn btn-ghost btn-small" id="load-demo"><Icon name="flask-conical" size={14} /> Try an example</button>
+              <button type="button" class="btn btn-ghost btn-small" id="clear-plan"><Icon name="trash-2" size={14} /> Clear plan</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel result-block" id="result-panel" aria-live="polite">
+          <h2 class="panel-title"><Icon name="calculator" /> 2 · Your raid cost</h2>
+          <div class="panel-pad">
+            <div id="result">
+              <div class="result-empty">
+                <Icon name="info" />
+                <span>Pick a target above - or hit <em>Try an example</em> - and your full shopping list appears here. No JavaScript? Use the static <a href="/raid-chart/">Rust raid chart</a>.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="panel" style="position:sticky;top:74px">
+          <h2 class="panel-title"><Icon name="skull" /> Raid total</h2>
+          <div class="panel-pad">
+            <div class="stat-row" style="grid-template-columns:1fr">
+              <div class="stat">
+                <div class="big-num" id="total-sulfur">0</div>
+                <div class="big-num-label">sulfur needed (cheapest route)</div>
+              </div>
+            </div>
+            <div class="stat-row" style="margin-top:12px">
+              <div class="stat"><div class="big-num" style="font-size:1.5rem" id="total-nodes">0</div><div class="big-num-label">sulfur nodes</div></div>
+              <div class="stat"><div class="big-num" style="font-size:1.5rem" id="total-explosives">0</div><div class="big-num-label">explosives</div></div>
+            </div>
+            <div style="display:grid;gap:8px;margin-top:14px">
+              <a class="btn" href="/cheapest-raid-solver/"><Icon name="route" size={16} /> Find the cheapest raid</a>
+              <a class="btn btn-ghost" href="/sulfur-farming-calculator/"><Icon name="pickaxe" size={16} /> Farming time</a>
+              <button type="button" class="btn btn-ghost" id="copy-plan"><Icon name="copy" size={16} /> Copy plan</button>
+            </div>
+            <p class="help" style="margin-top:10px">The plan follows you between RaidCalc tools - it never leaves your device.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <noscript>
+    <div class="container">
+      <div class="note-box orange">
+        <Icon name="triangle-alert" />
+        <span>The interactive calculator needs JavaScript. The full counts are also published as static tables in the <a href="/raid-chart/">Rust raid chart</a>.</span>
+      </div>
+    </div>
+  </noscript>
+
+  <section class="section" id="how-to-use">
+    <div class="container prose">
+      <h2>How to use the raid cost calculator</h2>
+      <ol>
+        <li><strong>Pick targets.</strong> Tap a structure card, then set the quantity with the stepper. Mix and match: 2 sheet doors, 1 stone wall, 1 garage door, a turret…</li>
+        <li><strong>Choose the side</strong> you can hit. “Strong side” is the default and correct for most raids; switch to “weak (soft) side” if you can reach the inside face - it cuts explosive-ammo and torch counts.</li>
+        <li><strong>Read your shopping list.</strong> The table shows every explosive with units needed and its sulfur bill, plus the raid total in sulfur and sulfur nodes.</li>
+        <li><strong>Send it down the pipeline.</strong> “Find the cheapest raid” ranks your options by sulfur; “Farming time” estimates the grind at your farming rate.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <div class="container">
+      <h2>Why raiders use this calculator</h2>
+      <div class="card-grid">
+        <div class="tool-card">
+          <h3><Icon name="sigma" /> Real damage values</h3>
+          <p>Counts are computed as <span class="mono">ceil(target HP ÷ damage)</span> using per-structure damage from published raid tables - not rounded community lore.</p>
+        </div>
+        <div class="tool-card">
+          <h3><Icon name="flame" /> Every explosive type</h3>
+          <p>C4, rockets, satchels, beancans, explosive 5.56, MLRS rockets and even torches - with sulfur cost and workbench tier for each.</p>
+        </div>
+        <div class="tool-card">
+          <h3><Icon name="lock-keyhole" /> Deployables included</h3>
+          <p>Tool cupboards, auto turrets and SAM sites are real raid targets. Their HP and damage taken sit in the same table.</p>
+        </div>
+        <div class="tool-card">
+          <h3><Icon name="shield" /> Private by design</h3>
+          <p>Your base plan stays in your browser’s local storage. No account, no upload, no telemetry on your targets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="examples">
+    <div class="container">
+      <h2>Worked examples</h2>
+      <p class="lede" style="color:var(--muted)">Same engine, same numbers - computed server-side so you can check the tool’s work.</p>
+      <div class="table-wrap" style="margin-top:14px">
+        <table class="data">
+          <caption class="sr-only">Example raid costs computed with the same formula the tool uses</caption>
+          <thead>
+            <tr><th>Target</th><th class="num">HP</th><th class="num">Rockets</th><th class="num">C4</th><th class="num">Satchels</th><th class="num">Explo ammo (strong)</th><th class="num">Cheapest sulfur</th></tr>
+          </thead>
+          <tbody>
+            {['sheet-door', 'garage-door', 'stone-wall', 'armored-wall', 'armored-door'].map((id) => {
+              const t = TARGETS.find((x) => x.id === id)!;
+              const opts = ['ammo', 'satchel', 'beancan', 'c4', 'rocket']
+                .map((ex) => ({ ex, n: unitsFor(id, ex)!, s: unitsFor(id, ex)! * (EXPLOSIVES.find((e) => e.id === ex)!.sulfur ?? 0) }))
+                .sort((a, b) => a.s - b.s);
+              const best = opts[0];
+              return (
+                <tr>
+                  <td>{t.name}</td>
+                  <td class="num">{fmt(t.hp)}</td>
+                  <td class="num">{unitsFor(id, 'rocket')}</td>
+                  <td class="num">{unitsFor(id, 'c4')}</td>
+                  <td class="num">{unitsFor(id, 'satchel')}</td>
+                  <td class="num">{unitsFor(id, 'ammo', 'hard')}</td>
+                  <td class="num hl">{fmt(best.s)} <span style="color:var(--muted)">({best.n}× {EXPLOSIVES.find((e) => e.id === best.ex)!.short})</span></td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note" style="margin-top:10px">
+        Example: a sheet metal door takes {exRocket} rocket(s), {exAmmo} explosive rounds or {exSatchel} satchels - 250 HP ÷ 220.375 = 1.13 → 2 rockets, rounded up.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container prose">
+      <h2>How the raid math works</h2>
+      <p>
+        For every target and explosive, the count is
+        <strong><span class="mono">ceil(target HP ÷ damage per explosive)</span></strong> - you always round up,
+        because a partially damaged wall still stops you. The sulfur bill is
+        <span class="mono">count × sulfur per explosive</span>, where sulfur-per-explosive comes from the crafting
+        recipes: 1 C4 = 20 Explosives = <strong>2,200 sulfur</strong>; 1 rocket = <strong>1,400</strong>;
+        1 satchel = <strong>480</strong>; 1 beancan = <strong>120</strong>; 1 explosive round = <strong>25</strong>.
+      </p>
+      <p>
+        Damage values and target HP come from the Rust Wiki’s destruction chart and building pages, cross-checked
+        against the RustClash raid tables (the maintained successor of Rustlabs) on <strong>{DATA_SNAPSHOT}</strong>.
+        Where the two sources disagreed - beancans vs armored door, explosive ammo vs stone wall - we kept the value
+        whose damage × count math is self-consistent, and we document the choice on the
+        <a href="/methodology/">methodology page</a>.
+      </p>
+      <h3>Limitations, stated plainly</h3>
+      <ul>
+        <li>Minimums assume every charge lands and detonates. Satchels can dud - carry spares.</li>
+        <li>Counts assume point-blank placement; splash falloff changes what actually dies in a live raid.</li>
+        <li>Multi-TC and rebuild costs are out of scope; this tool prices destruction, not the rebuild.</li>
+        <li>Game balance changes with updates. If Facepunch nerfs an explosive, the numbers change - the snapshot date tells you how fresh the data is.</li>
+      </ul>
+    </div>
+  </section>
+
+  <FAQ items={faq} />
+
+  <section class="section">
+    <div class="container">
+      <h2>Related tools &amp; guides</h2>
+      <div class="card-grid">
+        <a class="tool-card" href="/cheapest-raid-solver/">
+          <h3><Icon name="route" /> Cheapest Raid Solver</h3>
+          <p>Rank every explosive option for your plan by sulfur cost - see the mixed “shopping list” that wastes nothing.</p>
+          <span class="tool-card-go">Rank my raid →</span>
+        </a>
+        <a class="tool-card" href="/sulfur-farming-calculator/">
+          <h3><Icon name="pickaxe" /> Sulfur Farming ETA</h3>
+          <p>Enter your sulfur per minute and see how long the raid you just priced will take to farm.</p>
+          <span class="tool-card-go">Time the grind →</span>
+        </a>
+        <a class="tool-card" href="/raid-chart/">
+          <h3><Icon name="table-properties" /> Rust Raid Chart</h3>
+          <p>The full explosive-count table for every wall, door and deployable - static, citable, printable.</p>
+          <span class="tool-card-go">Open the chart →</span>
+        </a>
+        <a class="tool-card" href="/guides/soft-side-vs-hard-side/">
+          <h3><Icon name="flip-horizontal" /> Soft Side vs Hard Side</h3>
+          <p>What soft siding is, when it cuts your cost, and why C4 doesn’t care which face it sticks to.</p>
+          <span class="tool-card-go">Learn the trick →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="trust-block">
+        <span><Icon name="shield-check" size={15} /> Made by <a href="/about/">RaidCalc</a></span>
+        <span><Icon name="book-open" size={15} /> Data &amp; math: <a href="/methodology/">methodology &amp; sources</a></span>
+        <span><Icon name="calendar-check" size={15} /> Last verified: {DATA_SNAPSHOT}</span>
+        <span><Icon name="mail" size={15} /> Spotted a wrong number? <a href="/contact/">Report it</a></span>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="rc-data" set:html={JSON.stringify(payload)} />
+
+  <script>
+    import { loadPlan, savePlan, clearPlan, announcePlan, planSummary } from '../lib/plan-store';
+    import {
+      cheapestMixedFromPayload,
+      unitsForPayload,
+      fmt,
+      type Payload,
+      type PlanRowLite,
+    } from '../lib/raid-client';
+
+    const dataEl = document.getElementById('rc-data') as HTMLScriptElement;
+    const payload = JSON.parse(dataEl.textContent!) as Payload & { icons: Record<string, string>; iconFor: Record<string, string> };
+    const names = Object.fromEntries(payload.targets.map((t) => [t.id, t.name]));
+
+    let side: 'hard' | 'soft' = 'hard';
+    let plan: PlanRowLite[] = loadPlan().map((r) => ({ t: r.t, q: r.q, s: r.s }));
+
+    const picker = document.getElementById('picker')!;
+    const resultEl = document.getElementById('result')!;
+    const totalSulfur = document.getElementById('total-sulfur')!;
+    const totalNodes = document.getElementById('total-nodes')!;
+    const totalExpl = document.getElementById('total-explosives')!;
+
+    function icon(name: string, size = 16): string {
+      const tpl = payload.icons[name];
+      if (!tpl) return '';
+      return tpl.replaceAll('{S}', String(size)).replace('<svg', '<svg aria-hidden="true" focusable="false"');
+    }
+
+    function renderPicker() {
+      const groups: [string, string][] = [['walls', 'Walls'], ['doors', 'Doors'], ['deployables', 'Deployables']];
+      picker.innerHTML = groups
+        .map(([cat, label]) => `
+          <div style="margin-bottom:12px">
+            <div class="big-num-label" style="margin-bottom:6px">${label}</div>
+            <div class="pick-grid">
+              ${payload.targets.filter((t) => t.cat === cat).map((t) => {
+                const row = plan.find((r) => r.t === t.id);
+                const q = row?.q ?? 0;
+                return `
+                <div class="pick ${q > 0 ? 'active' : ''}" data-target="${t.id}">
+                  <div class="pick-name">
+                    ${icon(payload.iconFor[t.id] ?? 'box')}
+                    <span>
+                      <b>${t.short}</b>
+                      <span class="pick-sub">${fmt(t.hp)} HP${t.wood ? ' · wood' : ''}</span>
+                    </span>
+                  </div>
+                  <div class="stepper">
+                    <button type="button" data-step="-1" aria-label="Remove one ${t.name}">−</button>
+                    <input type="number" inputmode="numeric" min="0" max="500" value="${q}"
+                      aria-label="${t.name} quantity" data-qty="${t.id}" />
+                    <button type="button" data-step="1" aria-label="Add one ${t.name}">+</button>
+                  </div>
+                </div>`;
+              }).join('')}
+            </div>
+          </div>`)
+        .join('');
+
+      picker.querySelectorAll('.stepper button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const wrap = btn.closest('.pick') as HTMLElement;
+          const tId = wrap.dataset.target!;
+          const input = wrap.querySelector('input') as HTMLInputElement;
+          const next = Math.max(0, Math.min(500, (parseInt(input.value, 10) || 0) + parseInt(btn.dataset.step!, 10)));
+          input.value = String(next);
+          setQty(tId, next);
+        });
+      });
+      picker.querySelectorAll('input[data-qty]').forEach((input) => {
+        input.addEventListener('change', () => {
+          const q = Math.max(0, Math.min(500, parseInt((input as HTMLInputElement).value, 10) || 0));
+          setQty((input as HTMLElement).dataset.qty!, q);
+        });
+      });
+    }
+
+    function setQty(tId: string, q: number) {
+      const row = plan.find((r) => r.t === tId);
+      if (q > 0) {
+        if (row) { row.q = q; row.s = side; } else plan.push({ t: tId, q, s: side });
+      } else {
+        plan = plan.filter((r) => r.t !== tId);
+      }
+      saveAndRender();
+      track('tool_start', { tool_name: 'raid-cost' });
+    }
+
+    function saveAndRender() {
+      savePlan(plan);
+      announcePlan();
+      renderPicker();
+      renderResults();
+    }
+
+    function renderResults() {
+      const rows = plan.filter((r) => r.q > 0);
+      if (!rows.length) {
+        resultEl.innerHTML = `<div class="result-empty">Pick a target above - or hit <em>Try an example</em> - and your full shopping list appears here.</div>`;
+        totalSulfur.textContent = '0'; totalNodes.textContent = '0'; totalExpl.textContent = '0';
+        return;
+      }
+
+      const cheapest = cheapestMixedFromPayload(payload, rows.map((r) => ({ ...r, s: r.s ?? side })));
+      let explCount = 0;
+      const perEx = new Map<string, { count: number; sulfur: number; bench: number; name: string }>();
+      const perTarget: string[] = [];
+      const bestByTarget = new Map(cheapest.perTarget.map((p) => [p.targetId, p.explosiveId]));
+
+      for (const row of rows) {
+        const t = payload.targets.find((x) => x.id === row.t)!;
+        const s = row.s ?? side;
+        const lines: string[] = [];
+        for (const ex of payload.explosives) {
+          const n = unitsForPayload(payload, row.t, ex.id, s);
+          if (n == null) continue;
+          const total = n * row.q;
+          if (ex.kind !== 'tool') explCount += total;
+          const sCost = ex.sulfur == null ? null : ex.sulfur * total;
+          const acc = perEx.get(ex.id) ?? { count: 0, sulfur: 0, bench: ex.bench, name: ex.name };
+          acc.count += total;
+          if (sCost != null) acc.sulfur += sCost;
+          perEx.set(ex.id, acc);
+          lines.push(`<li>${fmt(total)}× ${ex.short}${sCost != null ? ` - ${fmt(sCost)} sulfur` : ' - no sulfur'}</li>`);
+        }
+        perTarget.push(`<details><summary>${row.q}× ${t.name} <span class="badge">${s === 'soft' ? 'soft side' : 'strong side'}</span></summary><ul style="margin:8px 0 0;padding-left:18px;font-size:0.88rem;color:var(--ink-soft)">${lines.join('')}</ul></details>`);
+      }
+
+      resultEl.innerHTML = `
+        <div class="note-box orange" style="margin-bottom:14px">
+          <span>Cheapest mixed route for this plan: <strong>${fmt(cheapest.sulfur)} sulfur</strong> - 
+          ${cheapest.groups.map((g) => `${fmt(g.count)}× ${payload.explosives.find((e) => e.id === g.id)!.short}`).join(' + ') || 'nothing yet'}.
+          Full options ranked in the <a href="/cheapest-raid-solver/">solver</a>.</span>
+        </div>
+        <div class="table-wrap">
+          <table class="data">
+            <thead><tr><th>Explosive</th><th class="num">Needed</th><th class="num">Sulfur</th><th>Bench</th></tr></thead>
+            <tbody>
+              ${[...perEx.entries()].filter(([, v]) => v.count > 0).map(([id, v]) => `
+                <tr class="${bestByTarget.size > 0 && cheapest.groups.some((g) => g.id === id) ? 'hl' : ''}">
+                  <td>${v.name}</td>
+                  <td class="num"><b>${fmt(v.count)}</b></td>
+                  <td class="num">${v.sulfur ? fmt(v.sulfur) : '-'}</td>
+                  <td>${v.bench > 0 ? `<span class="badge ${v.bench === 3 ? 'badge-orange' : ''}">T${v.bench}</span>` : '<span class="badge">none</span>'}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:12px">
+          <div class="big-num-label" style="margin-bottom:6px">Per target - every option</div>
+          ${perTarget.join('')}
+        </div>`;
+      totalSulfur.textContent = fmt(cheapest.sulfur);
+      totalNodes.textContent = fmt(Math.ceil(cheapest.sulfur / 300));
+      totalExpl.textContent = fmt(explCount);
+      track('tool_complete', { tool_name: 'raid-cost' });
+    }
+
+    // side toggle
+    document.querySelectorAll('.seg button[data-side]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        side = (btn as HTMLElement).dataset.side as 'hard' | 'soft';
+        document.querySelectorAll('.seg button[data-side]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        plan.forEach((r) => (r.s = side));
+        saveAndRender();
+      });
+    });
+
+    // demo + clear
+    document.getElementById('load-demo')?.addEventListener('click', () => {
+      plan = [
+        { t: 'sheet-door', q: 2, s: side },
+        { t: 'stone-wall', q: 1, s: side },
+        { t: 'tc', q: 1, s: side },
+      ];
+      saveAndRender();
+      track('tool_start', { tool_name: 'raid-cost', variant: 'demo' });
+    });
+    document.getElementById('clear-plan')?.addEventListener('click', () => {
+      plan = [];
+      clearPlan();
+      announcePlan();
+      renderPicker();
+      renderResults();
+    });
+
+    // copy plan
+    document.getElementById('copy-plan')?.addEventListener('click', async () => {
+      const text = planSummary(plan, names);
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        const btn = document.getElementById('copy-plan')!;
+        const old = btn.innerHTML;
+        btn.innerHTML = 'Copied!';
+        setTimeout(() => (btn.innerHTML = old), 1500);
+        track('result_copy', { tool_name: 'raid-cost' });
+      } catch { /* clipboard unavailable */ }
+    });
+
+    function track(event: string, params: Record<string, unknown>) {
+      const w = window as any;
+      if (Array.isArray(w.dataLayer)) w.dataLayer.push({ event, ...params });
+      if (typeof w.plausible === 'function') w.plausible(event, { props: params });
+    }
+
+    renderPicker();
+    renderResults();
+  </script>
+</Base>

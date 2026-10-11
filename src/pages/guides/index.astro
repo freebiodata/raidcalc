@@ -1,0 +1,45 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { breadcrumbBlock } from '../../lib/schema';
+
+const title = 'Guides – Rust Raiding Basics | RaidCalc';
+const description =
+  'Rust raiding guides from RaidCalc: soft side vs hard side mechanics, cheap raiding tactics and how to read raid charts - with the numbers to back them.';
+
+const crumbs = [{ name: 'Guides' }];
+---
+<Base title={title} description={description} path="/guides/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'Guides', path: '/guides/' }])]}
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>Raiding guides</h1>
+      <p class="value-line">Short, numeric, honest guides - the mechanics behind the calculators, explained for raiders.</p>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section">
+    <div class="container">
+      <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+        <a class="tool-card" href="/guides/soft-side-vs-hard-side/">
+          <h3><Icon name="flip-horizontal" /> Soft side vs hard side</h3>
+          <p>Which face of a wall is weak, which explosives ignore it, and when soft siding cuts ammo counts by ~7% and torch hits by 90%.</p>
+          <span class="tool-card-go">Read the guide →</span>
+        </a>
+        <a class="tool-card" href="/raid-chart/">
+          <h3><Icon name="table-properties" /> How to read a raid chart</h3>
+          <p>Why counts are always rounded up, what “strong/weak” means in the ammo column, and why satchel minimums need a dud buffer.</p>
+          <span class="tool-card-go">Open the chart →</span>
+        </a>
+        <a class="tool-card" href="/cheapest-raid-solver/">
+          <h3><Icon name="route" /> Cheapest raid, worked examples</h3>
+          <p>Real quotes from the solver: doors, walls, garage doors - and why the “cheapest” answer changes with your workbench.</p>
+          <span class="tool-card-go">See the rankings →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

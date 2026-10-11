@@ -1,0 +1,54 @@
+== Pick Raiding ==
+
+Players can hit a component of the structure with a [[Weapons|weapon]] to do enough damage to destroy the component. The component takes a varying number of hits depending on the health and build tier of the component and the weapon used. Here are a few examples of commonly used raiding melee tools:
+== Explosives ==
+{| class="article-table"
+! colspan="6" |<div style="text-align: center;">Wall</div>
+|-
+!
+!Twig Tier
+!Wood Tier
+!Stone Tier
+!Sheet Metal Tier
+!Armored Tier
+|-
+|[[Timed Explosive Charge]]s
+|1
+|1
+|2
+|4
+|8
+|-
+|[[Rocket Launcher|Rocket launcher]] ([[Rocket]])
+|1
+|1
+|4
+|8
+|15
+|-
+|[[Rocket Launcher|Rocket launcher]] ([[High Velocity Rocket|HV Rocket]])
+|1
+|9
+|32
+|67
+|134
+|-
+|[[F1 Grenade]]s
+|1
+|59
+|182
+|993
+|1986
+|}
+
+Doors require half the amounts.
+
+==Projectile Weapons==
+Not much is known about the effect of projectiles on the health of structures. A detailed damage list can be found here: [https://rustinfo.com/raiding Damage Table]
+
+However, this we do know: 
+*Twig and Wood structures are on the weaker side to begin with, but instead of using projectiles it is probably better just to use melee weapons/tools.
+*[[Explosive 5.56 Rifle Ammo]] does greater damage to Sheet Metal and Armored tier structures than typical 5.56 or pistol rounds, although it is still rather inefficient compared to explosives.
+*A [[High Velocity Arrow]] fired from a [[Crossbow]] is capable of penetrating through structures of any building tier (except for Stone). This allows someone to shoot a person through a wall, for instance. The arrow cannot penetrate more than one structure.
+{{MechanicsFooter}}
+[[Category:Gameplay]]

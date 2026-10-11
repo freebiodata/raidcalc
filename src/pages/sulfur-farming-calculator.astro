@@ -1,0 +1,318 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import { DATA_SNAPSHOT, DAMAGE, TARGETS, EXPLOSIVES } from '../data/raid-data';
+import { webAppBlock, breadcrumbBlock } from '../lib/schema';
+
+const title = 'Rust Sulfur Farming Calculator – Raid ETA & Nodes | RaidCalc';
+const description =
+  'How long until your raid is farmed? Enter sulfur needed and your rate to get the ETA, sulfur nodes and ore to mine. Free Rust sulfur calculator.';
+
+const crumbs = [{ name: 'Sulfur Farming Calculator' }];
+
+const faq = [
+  {
+    q: 'How much sulfur does one node give in Rust?',
+    a: `<p>A sulfur-rich node yields <strong>300 sulfur ore</strong>, which smelts 1:1 into <strong>300 sulfur</strong> - that’s the number this calculator uses (per the <a href="https://rust.fandom.com/wiki/Sulfur_Ore" rel="noopener" target="_blank">Rust Wiki</a>). Small ground collectibles give 50 ore each.</p>`,
+  },
+  {
+    q: 'How many nodes for a stone wall raid?',
+    a: `<p>A 10-satchel stone-wall raid costs 4,800 sulfur ≈ <strong>16 sulfur nodes</strong>. The 2-C4 route (4,400 sulfur) is about 15 nodes. Type your own plan’s sulfur total above and the calculator converts it instantly.</p>`,
+  },
+  {
+    q: 'How much charcoal do I need?',
+    a: `<p>Gunpowder mixes 30 charcoal with 20 sulfur, so raid-crafting consumes roughly <strong>1.5 charcoal per sulfur</strong>. A 10,000-sulfur raid wants about 15,000 charcoal - the calculator shows this estimate alongside the ETA.</p>`,
+  },
+  {
+    q: 'What farming rate should I enter?',
+    a: `<p>Whatever you actually sustain: check your nodes-per-hour over a normal session, or time a few nodes and convert (a 300-sulfur node in 30 seconds ≈ 600 sulfur/min at peak - you won’t sustain that between respawns, so enter your honest average). The preset chips are labeled examples, not measured guarantees.</p>`,
+  },
+  {
+    q: 'Do sulfur quarries change the math?',
+    a: `<p>No - quarries just change your sulfur-per-minute. Enter the quarry’s output as your rate (watch its fuel) and the ETA holds. The node estimate still tells you what the equivalent hand-farming looks like.</p>`,
+  },
+];
+---
+<Base title={title} description={description} path="/sulfur-farming-calculator/" crumbs={crumbs}
+  jsonLd={[webAppBlock('/sulfur-farming-calculator/', 'Rust Sulfur Farming Calculator', description), breadcrumbBlock([{ name: 'Sulfur Farming Calculator', path: '/sulfur-farming-calculator/' }])]}
+>
+  <section class="hero">
+    <div class="container">
+      <span class="kicker"><Icon name="pickaxe" size={13} /> Tool 03 · Farming ETA</span>
+      <h1>Sulfur Farming Calculator</h1>
+      <p class="value-line">
+        You know the raid’s sulfur price. Now find out how long the grind takes: enter the sulfur total and your
+        farming rate, and get the ETA, the number of sulfur nodes and the charcoal you’ll burn through.
+      </p>
+      <div class="trust-microline">
+        <span><Icon name="check" size={14} /> Free, no sign-up</span>
+        <span><Icon name="check" size={14} /> Uses your plan from the other RaidCalc tools</span>
+        <span><Icon name="check" size={14} /> Node math: 1 node = 300 sulfur</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section" style="padding-top:22px">
+    <div class="container tool-layout stacked-right">
+      <div>
+        <div class="panel">
+          <h2 class="panel-title"><Icon name="gauge" /> Your grind</h2>
+          <div class="panel-pad">
+            <div class="field">
+              <label for="sulfur-needed">Sulfur needed</label>
+              <input type="number" id="sulfur-needed" inputmode="numeric" min="0" step="100" placeholder="e.g. 7550" />
+              <p class="help" id="plan-help">Loads your saved raid plan automatically. Example: 2 sheet doors + 1 stone wall = 7,550 sulfur.</p>
+            </div>
+            <div class="field">
+              <label for="rate">Farming rate</label>
+              <input type="number" id="rate" inputmode="decimal" min="0.1" step="1" value="150" />
+              <p class="help">Sulfur per minute of actual farming - check yourself over a normal session.</p>
+            </div>
+            <div class="field">
+              <span class="big-num-label" style="display:block;margin-bottom:6px">Or think in nodes</span>
+              <input type="number" id="nodes-per-hour" inputmode="decimal" min="0.1" step="1" value="30" />
+              <p class="help">Nodes per hour (1 node = 300 sulfur). Editing either field updates the other.</p>
+            </div>
+            <div class="field">
+              <span class="big-num-label" style="display:block;margin-bottom:6px">Example rates</span>
+              <div style="display:flex;gap:8px;flex-wrap:wrap" id="presets">
+                <button type="button" class="btn btn-ghost btn-small" data-min="75">Casual solo · 75/min</button>
+                <button type="button" class="btn btn-ghost btn-small" data-min="150">Focused solo · 150/min</button>
+                <button type="button" class="btn btn-ghost btn-small" data-min="400">Jackhammer + horse · 400/min</button>
+                <button type="button" class="btn btn-ghost btn-small" data-min="1000">Group + quarry · 1000/min</button>
+              </div>
+              <p class="help">Illustrative starting points, not measured averages - tune to your own farm.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="panel" style="position:sticky;top:74px" aria-live="polite">
+          <h2 class="panel-title"><Icon name="timer" /> Farming ETA</h2>
+          <div class="panel-pad">
+            <div class="stat">
+              <div class="big-num" id="eta">-</div>
+              <div class="big-num-label" id="eta-sub">enter sulfur to begin</div>
+            </div>
+            <div class="stat-row" style="margin-top:12px">
+              <div class="stat"><div class="big-num" style="font-size:1.4rem" id="nodes">-</div><div class="big-num-label">nodes</div></div>
+              <div class="stat"><div class="big-num" style="font-size:1.4rem" id="ore">-</div><div class="big-num-label">sulfur ore</div></div>
+            </div>
+            <div class="stat-row" style="margin-top:12px">
+              <div class="stat"><div class="big-num" style="font-size:1.4rem" id="charcoal">-</div><div class="big-num-label">charcoal (~1.5×)</div></div>
+              <div class="stat"><div class="big-num" style="font-size:1.4rem" id="sessions">-</div><div class="big-num-label">1h sessions</div></div>
+            </div>
+            <p class="help" style="margin-top:10px">All math runs in your browser.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container prose">
+      <h2>How the farming ETA is calculated</h2>
+      <p>
+        The ETA is a straight division - <span class="mono">sulfur needed ÷ sulfur per minute</span> - plus three
+        conversions every raider cares about:
+      </p>
+      <ul>
+        <li><strong>Nodes:</strong> sulfur ÷ 300. One sulfur-rich node yields 300 ore, and ore smelts 1:1 into sulfur.</li>
+        <li><strong>Charcoal:</strong> sulfur × 1.5. Gunpowder costs 30 charcoal per 20 sulfur, and almost every raid explosive burns gunpowder.</li>
+        <li><strong>Sessions:</strong> ETA ÷ 1 hour, so a “19 hours” grind reads as the ~20 evening sessions it actually is.</li>
+      </ul>
+      <p>
+        Rates are yours to enter because they vary wildly with tool, map, server population and how often you get
+        chased off your node. We deliberately don’t publish a “standard” rate - the presets above are clearly-labeled
+        example starting points.
+      </p>
+      <h3>Limitations</h3>
+      <ul>
+        <li>The ETA counts farming time only - smelting, crafting and hauling are on you.</li>
+        <li>Node respawn rates and map sulfur density are not modeled; enter your sustained rate and they’re already priced in.</li>
+        <li>Low-grade fuel for explosives (rockets and C4 need it) is a separate hunt.</li>
+      </ul>
+      <p class="source-note">Node yield per <a href="https://rust.fandom.com/wiki/Sulfur_Ore" rel="noopener" target="_blank">Rust Wiki - Sulfur Ore</a> · snapshot {DATA_SNAPSHOT} · full sources on the <a href="/methodology/">methodology page</a>.</p>
+    </div>
+  </section>
+
+  <section class="section" id="examples">
+    <div class="container">
+      <h2>What common raids cost in farming time</h2>
+      <p class="lede" style="color:var(--muted)">At an example 150 sulfur/min (≈ 1 node every 2 minutes), a focused solo session:</p>
+      <div class="table-wrap" style="margin-top:14px">
+        <table class="data">
+          <thead>
+            <tr><th>Raid</th><th class="num">Sulfur (cheapest)</th><th class="num">Nodes</th><th class="num">Farming time @150/min</th></tr>
+          </thead>
+          <tbody>
+            {[
+              ['Open 1 sheet metal door', 1575],
+              ['10-satchel stone wall raid', 4800],
+              ['2 sheet doors + 1 stone wall + TC', 7550],
+              ['Armored door + 2 stone walls', 15850],
+              ['Armored wall punch-through', 8800],
+            ].map(([label, s]) => (
+              <tr>
+                <td>{label}</td>
+                <td class="num">{Number(s).toLocaleString('en-US')}</td>
+                <td class="num">{Math.ceil(Number(s) / 300)}</td>
+                <td class="num">{Math.round(Number(s) / 150)} min</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note" style="margin-top:10px">Cheapest-route sulfur from the <a href="/cheapest-raid-solver/">solver’s ranking</a> on {DATA_SNAPSHOT} data. Your rate is the variable - that’s what the calculator above is for.</p>
+    </div>
+  </section>
+
+  <FAQ items={faq} />
+
+  <section class="section">
+    <div class="container">
+      <h2>Related tools &amp; guides</h2>
+      <div class="card-grid">
+        <a class="tool-card" href="/cheapest-raid-solver/">
+          <h3><Icon name="route" /> Cheapest Raid Solver</h3>
+          <p>Shrink the grind: rank every explosive option by sulfur before you farm.</p>
+          <span class="tool-card-go">Cut the cost →</span>
+        </a>
+        <a class="tool-card" href="/raid-cost-calculator/">
+          <h3><Icon name="calculator" /> Raid Cost Calculator</h3>
+          <p>Pick targets and quantities to get the sulfur total in the first place.</p>
+          <span class="tool-card-go">Price a raid →</span>
+        </a>
+        <a class="tool-card" href="/raid-chart/">
+          <h3><Icon name="table-properties" /> Rust Raid Chart</h3>
+          <p>The complete explosive table, printable for your team’s Discord.</p>
+          <span class="tool-card-go">Open the chart →</span>
+        </a>
+        <a class="tool-card" href="/guides/soft-side-vs-hard-side/">
+          <h3><Icon name="flip-horizontal" /> Soft Side vs Hard Side</h3>
+          <p>Cut ammo counts nearly in half by hitting the right face.</p>
+          <span class="tool-card-go">Learn the trick →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="trust-block">
+        <span><Icon name="shield-check" size={15} /> Made by <a href="/about/">RaidCalc</a></span>
+        <span><Icon name="book-open" size={15} /> Math &amp; sources: <a href="/methodology/">methodology</a></span>
+        <span><Icon name="calendar-check" size={15} /> Last verified: {DATA_SNAPSHOT}</span>
+        <span><Icon name="mail" size={15} /> Feedback: <a href="/contact/">contact</a></span>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import { loadPlan, onPlan } from '../lib/plan-store';
+    import { cheapestMixedFromPayload, fmt, type Payload, type PlanRowLite } from '../lib/raid-client';
+
+    const SULFUR_PER_NODE = 300;
+
+    const dataEl = document.getElementById('rc-solver-data') as HTMLScriptElement | null;
+    // small payload only for cheapest-route totals (targets + explosives + damage)
+    const payload = dataEl
+      ? (JSON.parse(dataEl.textContent!) as Payload)
+      : ({ targets: [], explosives: [], damage: {} } as Payload);
+
+    const sulfurInput = document.getElementById('sulfur-needed') as HTMLInputElement;
+    const rateInput = document.getElementById('rate') as HTMLInputElement;
+    const nodesInput = document.getElementById('nodes-per-hour') as HTMLInputElement;
+    const eta = document.getElementById('eta')!;
+    const etaSub = document.getElementById('eta-sub')!;
+    const nodesEl = document.getElementById('nodes')!;
+    const oreEl = document.getElementById('ore')!;
+    const charcoalEl = document.getElementById('charcoal')!;
+    const sessionsEl = document.getElementById('sessions')!;
+
+    let syncing = false;
+
+    function h(min: number): string {
+      if (!Number.isFinite(min) || min <= 0) return '-';
+      if (min < 60) return `${Math.ceil(min)} min`;
+      const h = Math.floor(min / 60);
+      const m = Math.round(min % 60);
+      return m > 0 ? `${h} h ${m} min` : `${h} h`;
+    }
+
+    function nodesToRate(nph: number): number {
+      return (nph * SULFUR_PER_NODE) / 60;
+    }
+    function rateToNodes(spm: number): number {
+      return (spm * 60) / SULFUR_PER_NODE;
+    }
+
+    function render() {
+      const sulfur = Math.max(0, parseFloat(sulfurInput.value) || 0);
+      const spm = Math.max(0, parseFloat(rateInput.value) || 0);
+      if (sulfur <= 0) {
+        eta.textContent = '-';
+        etaSub.textContent = 'enter sulfur to begin';
+        nodesEl.textContent = '-'; oreEl.textContent = '-'; charcoalEl.textContent = '-'; sessionsEl.textContent = '-';
+        return;
+      }
+      const minutes = spm > 0 ? sulfur / spm : NaN;
+      eta.textContent = spm > 0 ? h(minutes) : '-';
+      etaSub.textContent = spm > 0 ? `of farming for ${fmt(sulfur)} sulfur` : 'set a farming rate';
+      nodesEl.textContent = fmt(Math.ceil(sulfur / SULFUR_PER_NODE));
+      oreEl.textContent = fmt(sulfur);
+      charcoalEl.textContent = fmt(Math.ceil(sulfur * 1.5));
+      sessionsEl.textContent = spm > 0 ? (Math.ceil(minutes / 60)).toString() : '-';
+    }
+
+    sulfurInput.addEventListener('input', render);
+    rateInput.addEventListener('input', () => {
+      if (syncing) return;
+      syncing = true;
+      nodesInput.value = String(Math.round(rateToNodes(parseFloat(rateInput.value) || 0) * 10) / 10);
+      syncing = false;
+      render();
+    });
+    nodesInput.addEventListener('input', () => {
+      if (syncing) return;
+      syncing = true;
+      rateInput.value = String(Math.round(nodesToRate(parseFloat(nodesInput.value) || 0)));
+      syncing = false;
+      render();
+    });
+
+    document.querySelectorAll('#presets button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        rateInput.value = (btn as HTMLElement).dataset.min!;
+        nodesInput.value = String(Math.round(rateToNodes(parseFloat(rateInput.value)) * 10) / 10);
+        render();
+      });
+    });
+
+    function loadFromPlan() {
+      const plan: PlanRowLite[] = loadPlan();
+      if (!plan.length) return;
+      const mixed = cheapestMixedFromPayload(payload, plan);
+      if (mixed.sulfur > 0) {
+        sulfurInput.value = String(mixed.sulfur);
+        document.getElementById('plan-help')!.textContent =
+          `Loaded from your plan: ${plan.map((r) => `${r.q}× ${payload.targets.find((t) => t.id === r.t)?.short ?? r.t}`).join(', ')} = ${fmt(mixed.sulfur)} sulfur (cheapest route).`;
+        render();
+      }
+    }
+
+    onPlan(loadFromPlan);
+    loadFromPlan();
+    render();
+  </script>
+
+  <script type="application/json" id="rc-solver-data" set:html={JSON.stringify({
+    targets: TARGETS.map((t) => ({ id: t.id, name: t.name, short: t.short, hp: t.hp, wood: !!t.wood, cat: t.category, note: t.note ?? null })),
+    explosives: EXPLOSIVES.map((e) => ({ id: e.id, name: e.name, short: e.short, sulfur: e.sulfur, bench: e.bench, kind: e.kind })),
+    damage: DAMAGE,
+  })} />
+</Base>

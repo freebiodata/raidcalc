@@ -1,0 +1,32 @@
+[[File:Ammo.rocket.mlrs.png|thumb]]
+
+= MLRS Rocket =
+The MLRS Rocket is a projectile for the MLRS, they are found in Locked Crates as well as the MLRS Aiming Module. It has lethal damage to both structures and players. 3 SAM Sites can easily destroy the projectiles.
+
+Damage: 500
+
+Explosion Radius: 15 m 
+
+Explosion Delay: 60-70 sec
+{| class="fandom-table"
+|+Loot
+!Container
+!Condition
+!Amount
+!Chance
+|-
+|[[Bradley APC|APC Crate]]
+| -
+|1-5
+|97%
+|-
+|[[Elite Tier Crate]]
+| -
+|1
+|50%
+|-
+|[[Attack Helicopter|Helicopter Crate]]
+| -
+|2
+|15%
+|}

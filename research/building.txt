@@ -1,0 +1,416 @@
+
+{{Template:LastUpdate|[https://playrust.com/devblog-110/ 884.05]}}
+
+In Rust, players can create their own structures to protect themselves from threats and store their loot.
+
+== Building Privilege ==
+{{main|Building Privilege}}
+If a player has Building Privilege in an area, other players will be prohibited to build in that area. Twigs and ladders can still be placed, but cannot be upgraded. A [[Tool Cupboard]] can be set to bestow privilege on a player and their allies.
+
+== Placing Structures ==
+[[File:Good Building Placement.jpg|thumb|Valid building placement]]
+[[File:Bad Building Placement.jpg|thumb|Invalid building placement]]To place a structure, a [[Building Plan]] must be crafted. Building plans costs 20 [[Wood]]. When the Building Plan is crafted, place it in the hotbar and select it. By default, the foundation object is selected, and you will see a "ghost" of it as you look around. To select other building objects, hold right mouse button, move your mouse in a circle to the object you want, and left click. To begin building, choose either a foundation or a triangular foundation, look at an area suitable for a house, and left click. This will create a [[#Twig Tier|Twig Tier]] foundation. To place walls, select them and aim at the edge of a foundation. Floors must be placed at the top edge of a wall, and doors must be placed inside door frames. Be careful, because as you build up, you have to keep track of the building's stability. If too many floors are built too far away from a wall, it will collapse.
+
+{{clr}}
+
+== Upgrading Structures ==
+
+To upgrade a structure, one needs a [[Hammer]]. Equip the Hammer, face the structure that you want to upgrade (it will be highlighted), and hold right click. This will give you the available options that the structure can be upgraded to. You will need the necessary materials in your inventory to upgrade any structure.
+
+Like upgrading structures, one needs a [[Hammer]] to repair building objects, as well as the necessary resources and tool cupboard access. Simply look at the object (it will be highlighted in green) and left click. The hammer will then swing at the object, and repair damage at the cost of corresponding resources. It may take quite a few swings to repair moderate or severe damage.
+
+== Building Tiers ==
+There are currently five building tiers in Rust. Some tiers are more vulnerable to [[raiding]] than others.
+=== Twig Tier ===
+
+<hr />[[File:Twig House.jpg|thumb|Twig Tier house.]]
+{| class="wikitable floatleft" style="margin:0px 10px 10px 0px; text-align: center; border: 3px solid #141414; background: dark gray"
+|+Build Cost
+|-
+| [[File:Building Plan icon.png|64px|link=Building Plan]]
+| style="border: 2px solid #141414" | [[File:Wood icon.png|64px|link=Wood]]
+|-
+| style="border: 2px solid #141414; background: #232626" | Square Foundation
+| style="border: 2px solid #141414; background: #232626" | '''50'''
+|-
+| Triangle Foundation
+| style="border: 2px solid #141414" | '''25'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Foundation Stairs
+| style="border: 2px solid #141414; background: #232626" | '''25'''
+|-
+| Square Floor
+| style="border: 2px solid #141414" | '''25'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Triangle Floor
+| style="border: 2px solid #141414; background: #232626" | '''13'''
+|-
+| Wall
+| style="border: 2px solid #141414" | '''50'''
+|-
+|Half Wall
+|'''50'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Low Wall
+| style="border: 2px solid #141414; background: #232626" | '''25'''
+|-
+| Doorway
+| style="border: 2px solid #141414" | '''35'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Window
+| style="border: 2px solid #141414; background: #232626" | '''35'''
+|-
+| Wall Frame
+| style="border: 2px solid #141414" | '''25'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Floor Frame
+| style="border: 2px solid #141414; background: #232626" | '''25'''
+|-
+| Stairs
+| style="border: 2px solid #141414" | '''50'''
+|-
+| Roof
+| style="border: 2px solid #141414" | '''50'''
+|}
+Twig Tier components can only be built using a [[Building Plan]]. They cannot be downgraded from higher tiers using a [[Hammer]]. They cost [[Wood]] to build.
+
+Twig Tier components serve as a main foundation for a base's design and can be used to prototype its layout and features.
+
+The costs associated with building a specific component can be viewed in the table to the left.
+
+Twig Tier components have 10 health and are extremely susceptible to all types of damage sources.
+
+The Twig Tier components' purpose is not strictly relegated to just building bases.
+
+They can be used to build temporary defensive structures, often incorporated in base designs, such as destructible drawbridges platforms.
+
+Similarly, they prove to be an essential, offensive element of raiding as they would allow one to construct raid towers and attach platforms to base walls to use as scaffolding, both of which aid in overcoming obstacles and heights.
+
+=== Twig Tier update ===
+After the Twig Tier [https://rust.facepunch.com/blog/devblog-158/ Devblog 158] update, defenders are concentrating on two methods: building out from bases with closely packed [[High External Stone Wall|High External Stone Walls]] and [[Metal Barricade|Metal Barricades]], or using the fact that Twig cannot be built above Stairs. The first is expensive; the counter to the latter is to build a twig tower and then place Frames or Doors, then balance a [[Large Wood Box]] on top. If the Stairs are not built out far enough, then the player can jump across to the roof. As always, Ladders can be placed on the walls; the counter to this is to build out, and the counter to that is to build Ceilings off of the ladders. In short, the defensive options seem to be, trying to build Stairs further out, and countering ladders with roofs, [[Sign (disambiguation)|Signs]], [[Large Planter Box|Planter Boxes]], Barricades etc, or the expensive option of High External Stone Walls with Metal Barricades or possibly [[Barbed Wooden Barricade|Barbed Wooden Barricades]].
+
+<div style="clear:both;"> </div>
+
+
+=== Wood Tier ===
+
+<hr />[[File:Wood House.jpg|thumb|Wood Tier house.]]
+{| class="wikitable floatleft" style="margin:0px 10px 10px 0px; text-align: center; border: 3px solid #141414; background: dark gray"
+|+Upgrade Cost
+|-
+| [[File:Hammer icon.png|64px|link=Hammer]]
+| style="border: 2px solid #141414" | [[File:Wood icon.png|64px|link=Wood]]
+|-
+| style="border: 2px solid #141414; background: #232626" | Square Foundation
+| style="border: 2px solid #141414; background: #232626" | '''200'''
+|-
+| Triangle Foundation
+| style="border: 2px solid #141414" | '''100'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Foundation Stairs
+| style="border: 2px solid #141414; background: #232626" | '''100'''
+|-
+| Square Floor
+| style="border: 2px solid #141414" | '''100'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Triangle Floor
+| style="border: 2px solid #141414; background: #232626" | '''50'''
+|-
+| Wall
+| style="border: 2px solid #141414" | '''200'''
+|-
+|Half Wall
+|'''200'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Low Wall
+| style="border: 2px solid #141414; background: #232626" | '''100'''
+|-
+| Doorway
+| style="border: 2px solid #141414" | '''140'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Window
+| style="border: 2px solid #141414; background: #232626" | '''140'''
+|-
+| Wall Frame
+| style="border: 2px solid #141414" | '''100'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Floor Frame
+| style="border: 2px solid #141414; background: #232626" | '''100'''
+|-
+| Stairs
+| style="border: 2px solid #141414" | '''200'''
+|-
+| Roof
+| style="border: 2px solid #141414" | '''200'''
+|}
+Wood Tier components cannot be built directly, but rather require an existing Twig Tier component to be upgraded using a [[Hammer]]. They cost [[Wood]] to build.
+
+Higher tiered components cannot be downgraded back to Wood Tier.
+
+The costs associated with upgrading a specific component can be viewed in the table to the left.
+
+Wood Tier components have 250 health and are susceptible to damage inflicted by explosives, projectiles, tools and most significantly - fire.
+
+[[Wooden Door|Wood Tier Doors]] have 200 health, take 30 seconds to craft and cost 300 [[Wood]].
+
+Upgrading to Wood Tier is mostly only useful in the Early Game, as it is relatively cost-effective and provides a degree of protection.
+
+It is, however, strongly recommended to upgrade Wood Tier structures to a higher Tier as soon as possible.
+
+Wood Tier components are also useful as a temporary component replacement during base expansions, since they can be easily demolished later on.
+
+<div style="clear:both;"> </div>
+
+
+=== Stone Tier ===
+
+<hr />[[File:Stone House.jpg|thumb|Stone Tier House]]
+{| class="wikitable floatleft" style="margin:0px 10px 10px 0px; text-align: center; border: 3px solid #141414; background: dark gray"
+|+Upgrade Cost
+|-
+| [[File:Hammer icon.png|64px|link=Hammer]]
+| style="border: 2px solid #141414" | [[File:Stones icon.png|64px|link=Stones]]
+|-
+| style="border: 2px solid #141414; background: #232626" | Square Foundation
+| style="border: 2px solid #141414; background: #232626" | '''300'''
+|-
+| Triangle Foundation
+| style="border: 2px solid #141414" | '''150'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Foundation Stairs
+| style="border: 2px solid #141414; background: #232626" | '''150'''
+|-
+| Square Floor
+| style="border: 2px solid #141414" | '''150'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Triangle Floor
+| style="border: 2px solid #141414; background: #232626" | '''75'''
+|-
+| Wall
+| style="border: 2px solid #141414" | '''300'''
+|-
+|Half Wall
+|'''300'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Low Wall
+| style="border: 2px solid #141414; background: #232626" | '''150'''
+|-
+| Doorway
+| style="border: 2px solid #141414" |  '''210'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Window
+| style="border: 2px solid #141414; background: #232626" | '''210'''
+|-
+| Wall Frame
+| style="border: 2px solid #141414" | '''150'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Floor Frame
+| style="border: 2px solid #141414; background: #232626" | '''150'''
+|-
+| Stairs
+| style="border: 2px solid #141414" |  '''300'''
+|-
+| Roof
+| style="border: 2px solid #141414" | '''300'''
+|}
+Stone Tier components cannot be built directly, but rather require an existing Twig or Wood Tier component to be upgraded using a [[Hammer]]. They cost [[Stones]] to build.
+
+Higher tiered components cannot be downgraded back to Stone Tier.
+
+The costs associated with upgrading a specific component can be viewed in the table to the left.
+
+Stone Tier components have 500 health and are invulnerable to damage inflicted by fire, most tools and regular projectiles. They are, however, susceptible to high explosive damage, such as [[Satchel Charge|Satchel Charges]] or [[Rocket|Rockets]]. They can also be damaged by [[Pick Axe|Metal Pickaxes]] and other melee weapons.
+
+Upgrading to Stone Tier remains a viable alternative for the entirety of the game, though, it is particularly useful during Early to Mid Game as the raw materials needed are relatively abundant and do not require any additional processing.
+
+It is strongly recommended to upgrade any Twig or Wood Tier structures to Stone Tier as soon as possible in order to ensure a sufficient degree of base protection.
+
+<div style="clear:both;"> </div>
+
+
+=== Sheet Metal Tier ===
+
+<hr />[[File:Sheet Metal House.jpg|thumb|Sheet Metal Tier house.]]
+{| class="wikitable floatleft" style="margin:0px 10px 10px 0px; text-align: center; border: 3px solid #141414; background: dark gray"
+|+Upgrade Cost
+|-
+| [[File:Hammer icon.png|64px|link=Hammer]]
+| style="border: 2px solid #141414" | [[File:Metal Fragments icon.png|64px|link=Metal Fragments]]
+|-
+| style="border: 2px solid #141414; background: #232626" | Square Foundation
+| style="border: 2px solid #141414; background: #232626" | '''200'''
+|-
+| Triangle Foundation
+| style="border: 2px solid #141414" | '''100'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Foundation Stairs
+| style="border: 2px solid #141414; background: #232626" | '''200'''
+|-
+| Square Floor
+| style="border: 2px solid #141414" | '''100'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Triangle Floor
+| style="border: 2px solid #141414; background: #232626" | '''50'''
+|-
+| Wall
+| style="border: 2px solid #141414" | '''200'''
+|-
+|Half Wall
+|200
+|-
+| style="border: 2px solid #141414; background: #232626" | Low Wall
+| style="border: 2px solid #141414; background: #232626" | '''100'''
+|-
+| Doorway
+| style="border: 2px solid #141414" |  '''140'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Window
+| style="border: 2px solid #141414; background: #232626" | '''140'''
+|-
+| Wall Frame
+| style="border: 2px solid #141414" | '''100'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Floor Frame
+| style="border: 2px solid #141414; background: #232626" | '''100'''
+|-
+| Stairs
+| style="border: 2px solid #141414" |  '''200'''
+|-
+| Roof
+| style="border: 2px solid #141414" | '''200'''
+|}
+Sheet Tier components cannot be built directly, but rather require an existing Twig, Wood, or Stone Tier component to be upgraded using a [[Hammer]]. They cost [[Metal Fragments]] to build.
+
+Most optimal and readily available option, in terms of cost/performance ratio, that a player can have access to. Sheet Metal Tier components require roughly half the amount of raw materials that Stone Tier does, however, they need to be processed and smelted in a [[Furnace]] first.
+
+The only downside to Sheet Metal Tier components is the fact that some of them(e.g., Walls, Foundations) are not fully opaque - the gaps between the attached metal sheets could potentially allow an intruder to view what is behind the wall. A remedy to counteract this would be to upgrade all exterior components of a base to Stone Tier and leave just the interior parts as Sheet Metal.
+
+It is recommended that you always upgrade Floor components as they will remain fully opaque, yet provide all of the strength benefits of the Sheet Metal Tier.
+
+<div style="clear:both;"> </div>
+
+
+=== Armored Tier ===
+
+<hr />[[File:Armored House.jpg|thumb|Armored Tier house.]]
+{| class="wikitable floatleft" style="margin:0px 10px 10px 0px; text-align: center; border: 3px solid #141414; background: dark gray"
+|+Upgrade Cost
+|-
+| [[File:Hammer icon.png|64px|link=Hammer]]
+| style="border: 2px solid #141414" | [[File:High Quality Metal icon.png|64px|link=High Quality Metal]]
+|-
+| style="border: 2px solid #141414; background: #232626" | Square Foundation
+| style="border: 2px solid #141414; background: #232626" | '''25'''
+|-
+| Triangle Foundation
+| style="border: 2px solid #141414" | '''13'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Foundation Stairs
+| style="border: 2px solid #141414; background: #232626" | '''25'''
+|-
+| Square Floor
+| style="border: 2px solid #141414" | '''13'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Triangle Floor
+| style="border: 2px solid #141414; background: #232626" | '''7'''
+|-
+| Wall
+| style="border: 2px solid #141414" | '''25'''
+|-
+|Half Wall
+|'''25'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Low Wall
+| style="border: 2px solid #141414; background: #232626" | '''13'''
+|-
+| Doorway
+| style="border: 2px solid #141414" |  '''18'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Window
+| style="border: 2px solid #141414; background: #232626" | '''18'''
+|-
+| Wall Frame
+| style="border: 2px solid #141414" | '''13'''
+|-
+| style="border: 2px solid #141414; background: #232626" | Floor Frame
+| style="border: 2px solid #141414; background: #232626" | '''13'''
+|-
+| Stairs
+| style="border: 2px solid #141414" | '''25'''
+|-
+| Roof
+| style="border: 2px solid #141414" |25
+|}
+Armored Tier is the strongest and final structure upgrade available.
+
+Armored Tier components cannot be built directly, but rather require an existing lower Tier component to be upgraded using a [[Hammer]]. They need [[High Quality Metal]] to build.
+
+Armored Tier components cannot be downgraded back to lower Tiers.
+
+The costs associated with upgrading a specific component can be viewed in the table to the left.
+
+Armored Tier components have 2000 health and are extremely resistant all sources of damage, with the exception of explosives.
+
+[[Armored Door|Armored Tier Doors]] have 800 health, take 30 seconds to craft and cost 5 [[Gears]] and 20/25 (single vs double) [[High Quality Metal]].
+
+Even though the Armored Tier provides the highest degree of protection, it is seldom used mainly due to its prohibitive upgrade cost. In comparison to [[Building#Sheet_Metal_Tier|Sheet Metal Tier]] components and in terms of explosive resistance, Armored Tier components are only 50% stronger, while being orders of magnitude costlier to produce and maintain.
+
+Naturally, one would feel inclined to build a compact loot room and upgrade it to Armored for maximum protection. However, this may prove to be an ill-conceived idea since Armored Tier attracts the attention of raiders. Furthermore, access points such as doorways & wall/floor frames will remain as weak points even when armored since the best available [[Armored Door|Armored Tier Doors]] are in many ways equivalent to [[Building#Sheet Metal Tier|Sheet Tier]].
+
+An uncommonly seen tactic involves building armored, empty, fake loot rooms in hopes of baiting potential raiders into wasting explosives on the decoy room.
+
+Arguably, the most efficient application of the Armored Tier is upgrading Floor tiles. While still quite expensive, the cost to upgrade is halved or even quartered in comparison to regular components, such as Walls and Foundations. Armored Floor tiles will, however, prevent pickaxing and slow down top-down and bottom-up raids the most.
+== Wall Placement==
+Place your walls so the smooth face is facing inwards. The textured side is stronger than the smooth (Inner side) of the wall. Sheet Metal walls, however, don't really have a smooth face; place the walls so that the crossbars are facing inwards - that is the weaker side. You can rotate the walls with a [[Hammer]]. If you have misplaced a wall and the time to rotate it has past, then simply upgrade the wall to a higher tier to then rotate it again.  
+
+== Building Locations ==
+You can build in almost all locations in Rust. All biomes cater for building, and special terrain will also allow for construction. However, steep slopes and uneven ground may prevent building.
+
+Special Terrain Areas may include
+
+Rocks - known for their impenetrability, once a tool cupboard is placed on a rock, it is impossible to get up assuming there are no paths up the rock. *TWIG UPDATE makes building on rocks physically pointless...
+
+Mountains - Most maps have a mountain, usually near the center of the map. This mountain is too steep to place foundations on for the majority of the slope, however with trial and error, it is possible to find a sweet spot and place one foundation. Once the first is down, others will usually snap without a problem.
+
+Rivers, Lakes and Bodies of Water - If the water is shallow enough, it is possible to build on it. Foundations can be placed underwater as well as above water.
+
+== Tool Cupboard ==
+{{Main Article|Tool Cupboard}}The Tool Cupboard authorizes players to build within 50 meters of any foundation that is attached to the base which it is placed in. Keep it well guarded (Twig floors can be built, regardless of the building privileges). To authorize yourself, simply look at it and press E. To remove other players' authorization in that area, hold E and circle to the option to Clear Authorized List.
+
+== Locks ==
+Locks are used to keep people from accessing valuables. Locks can be placed on doors, containers (storage boxes and vending machines) and the Tool Cupboard. There are two different types of locks: the [[Lock|Key Lock]] which can be crafted with [[Wood]], and the [[Code Lock]] which requires [[Metal Fragments]]. Both are available to craft by default.
+
+To place a Key Lock, select it and left click on the target. Once deployed, target the lock, hold down the Use key (default ''"E"'') and select Lock; only the person who locks the door can open it. To create keys to allow other people through the door, hold down the Use key and select Create Key (requires 25 Wood). Multiple key copies can be created either whoever placed the lock initially or anyone with a key. Other players can kill those who have keys in their inventory and will therefore gain access your base, so keep them safe!
+
+The other lock is the [[Code Lock|code lock]], (100 [[Metal Fragments]]) which uses a 4 digit code instead of a key.
+
+== Stability ==
+{{Main Article|Stability}}Stability is a reflection of a structure's endurance; the more stable, the less likely it is to fall apart, if it reaches zero, it will break instantly upon placement. A stability percentage is visible when mousing over a building object at melee range. An easy way to add stability to a structure is to add pillars before placing walls. This should be the second step when building a house, after completing the foundation. Pillars can only be placed if there are no other objects in their path, and if there is a foundation underneath. When building pillars on the second floor or higher, there must be pillars placed below as well.
+
+== Decay ==
+{{Main Article|Decay}}Linear Decay has been added as of April 16, 2015. Decay is a mechanic in which all building objects will gradually start "decaying". This may not be a visible sign, but it will affect the health of your building. The health of the twig or wood structure will gradually start losing health after a short duration of time (a few hours), and eventually the twig/wood objects will collapse and disappear. Stone, sheet metal, and armored tier foundations will take a bit longer (a few days). To avoid this, try to upgrade objects to stone or higher. In doors with locks that have been opened or closed will reset the decay timer, as long as it is connected and within a certain radius of the door. Decay affects deployables and building structures.
+
+== Bunker ==
+In ''[[Rust]]'', bunkers are an essential defensive strategy to protect your most valuable items from raiders. These hidden or hard-to-access sections of your base increase the cost and effort of raiding, especially for offline raiders. Bunkers often secure critical items like [[Tool Cupboard|Tool Cupboards (TCs)]] or loot and use specific building mechanics to seal or open the bunker. Popular designs, such as the [https://www.rustbasedesign.com/rust-bunker-guide#vending_machine_tc_bunker Vending Machine TC Bunker] or the [https://www.rustbasedesign.com/rust-bunker-guide#freehand_bunker Freehand Bunker], utilize simple building methods to enhance base security while keeping material costs low. Incorporating bunkers into your base design can make a significant difference in protecting your resources.<ref>https://www.rustbasedesign.com/rust-bunker-guide</ref>
+
+== Guide Video ==
+[[File:Rust Beginner's Guide - Base Building 101|thumb|480x480px]]
+Here's a guide video that shows you the essentials of Base Building in Rust and a few additional things you might not know.
+
+== Other Applications ==
+Other applications available (''Not created by [[Facepunch Studios|Facepunch]]) ''that can assist in base designs, and other in-game features.
+
+=== Base Design Emulators ===
+* '''Fortify '''on [http://store.steampowered.com/app/505040/ Steam]
+* '''Rubled '''on [http://store.steampowered.com/app/402460/ Steam]
+
+=== In-Game Art Generator ===
+* '''Rustangelo''' available on [http://www.rustangelo.com/ rustangelo.com]
+
+{{MechanicsFooter}}
+
+== Links ==
+* [https://www.youtube.com/watch?v=kvAvcT8_JlI RUST - how to counter the Raid buff (Tips & Tricks)]. Note the use of Doors in combination with the wood boxes
+* [https://www.youtube.com/watch?v=fifTWpsVu9w 3 Building Tips to DOMINATE the New Rust Update | Quick Tips #8]. Note Roof Stacking, and also Signs, planter boxes, etc to block ladders
+[[Category:Experimental Content]]
+[[Category:Gameplay]]

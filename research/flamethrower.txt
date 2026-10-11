@@ -1,0 +1,50 @@
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+ | title             = Flame Thrower
+ | description       = A Flamethrower. Uses low grade fuel as ammunition
+ | shortname         = flamethrower
+ | stacksize         = 1
+ | type              = Ranged Weapon
+ | firemode          = Full Automatic
+ | attackinterval    = ''Unknown''
+ | dmghead           = 8
+ | dmgchest          = 8
+ | dmgarms           = 8
+ | dmglegs           = 8
+ | recoil            = No
+ | range             = Short
+ | capacity          = 100
+ | ammunition        = {{ItemCount|Low Grade Fuel|}}
+ | modslots          = 0
+ | weaponmods        = 
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 120
+ | ingredients       = {{ItemCount|High Quality Metal|15}}{{ItemCount|Metal Pipe|6}}{{ItemCount|Low Grade Fuel|100}}{{ItemCount|Empty Propane Tank|2}}
+ | usedinitems       = No
+}}
+
+The '''Flame Thrower''' is a ranged weapon that shoots out intense flames. It uses [[Low Grade Fuel]] as ammunition and it is the first weapon in Rust that specializes only in Fire/Heat damage. It is chambered in fuel canisters of 100 Low Grade Fuel, and it takes around 10 - 15 seconds of constant fire before the canister is emptied. It is highly effective against wooden and twig buildings, and makes an impressive weapon for self-defence against hostile animals, although loot drops from an animal killed in this manner will be reduced, presumably because they have been burned. However, it is very ineffective against stone, metal, and armoured buildings. The range is short, so it is not very common to see in PvP situations.
+
+To toggle on/off the pilot light which ignites the fire, press the right mouse button.
+
+== Crafting ==
+The Flame Thrower can be crafted.
+
+Needs WorkBench level 2
+* 6 [[Metal Pipe]]
+* 15 High Quality Metal
+* 100 [[Low Grade Fuel]]
+* 2 [[Empty Propane Tank]]
+
+== Gallery ==
+<gallery>
+Flame_Thrower_World_Model.jpg|A view of the Flame Thrower's world model.
+Flame_Thrower_Player_Model.jpg|The Flame Thrower as seen from a player's perspective, while being reloaded.
+Flame_Thrower_Night.jpg|The Flame Thrower at night.
+</gallery>
+
+
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Experimental Content]]

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# No internal search or parameter spaces exist on this site; nothing to disallow.
+Sitemap: https://raidcalc.top/sitemap-index.xml

@@ -1,0 +1,46 @@
+{{LastUpdate|1263302}}
+
+== Damage and function times ==
+{{Infobox_item|title = Satchel Charge|image = Satchel Charge icon-0.png|imagecaption = Kaboom|ingredients = {{ItemCount|Rope|1}}{{ItemCount|Beancan Grenade|4}}{{ItemCount|Small Stash|1}}|craftable = Blueprint needed|weapontype=|type=Explosive}}The Satchel Charge is an unreliable raiding tool that can be used to destroy player-made buildings for the purpose of entering other players bases and looting them.
+
+The Satchel charge becomes armed when placed, has a random time until detonation, and has a small chance to malfunction, requiring the user to pick up and rearm.
+
+== Crafting ==
+Crafting a Satchel Charge requires:
+* 4 [[Beancan Grenade|Beancan Grenades]]
+* 1 [[Small Stash]]
+* 1 [[Rope]]
+
+
+It takes 30 seconds to craft a single Satchel Charge, using the aforementioned raw materials.
+
+The raw materials required for crafting a Satchel Charge from scratch are:
+* 480 [[Sulfur]] to make [[Gunpowder]]
+* 720 [[Charcoal]] to make [[Gunpowder]]
+* 80 [[Metal Fragments]] to make [[Beancan Grenade]]s
+* 10 [[Cloth]] to make [[Small Stash]]
+* 1 [[Rope]]
+This does not include the necessary [[Wood]] used in the [[Furnace]] to smelt the ore.
+
+== Raid Chart (values subject to change) ==
+{{:Destruction}}
+{{Clr}}
+[[Category:Items]]
+[[Category:Weapons]]
+[[Category:Explosives]]
+[[Category:Throwable Weapon]]
+[[Category:Floor grill]]
+[[Category:Wood ceiling]]
+[[Category:Iron bars]]
+[[Category:Roof]]
+[[Category:Stone ceiling]]
+[[Category:Doorway]]
+[[Category:Floorgrill]]
+[[Category:Metal barricade]]
+[[Category:Guns]]
+[[Category:EXPLOSIVE AMMO]]
+[[Category:Doors]]
+[[Category:FLOOR]]
+[[Category:Stone]]
+[[Category:Metal ceiling]]
+[[Category:Stone foundaton]]

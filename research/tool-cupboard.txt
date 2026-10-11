@@ -1,0 +1,51 @@
+{{Infobox-Item
+ | title             = Tool Cupboard
+ | description       = Placing and authorizing with the cupboard will make it so only you can build in a 50 meter radius of it. If you want your friends to build, they'll need to authorize too. You should protect this.
+ | shortname         = cupboard.tool
+ | stacksize         = 1
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 30
+ | ingredients       = {{ItemCount|Wood|1,000}}
+ | usedinitems       = No
+}}The '''Tool Cupboard''' is a deployable item that is typically used to provide base protection and/or secure an area by preventing unauthorized players from being able to upgrade their items beyond twig state, in the vicinity of the base that the cupboard occupies. The protection distance is roughly 6 foundations away from the base at any point. The area of protection is shaped around the players base, above the bottom of the cupboard. Within this protection area of the Tool Cupboard, players will have the "Building Blocked" status; unauthorized players will be blocked from placing and upgrading structures in the area of the cupboard.
+
+== Usage ==
+To deploy a Tool Cupboard drag it onto your Action Bar, select it and click(default ''"Left Mouse Button"''), while aiming at the desired location. Initially you will be affected by a [[Building Privilege|''"Building Blocked"'']] debuff as a newly spawned cupboard's Authorization List is empty by default. To gain ''"Building Privilege"'' and be able to build in the area, target the cupboard press the Use key (default ''"E"'') to authorize yourself. Pressing the Use key (E by default), while already authorized, will remove you from the Authorization List. It is possible for multiple players to approach the cupboard and authorize themselves at any given time. 
+
+Should you need to restrict authorized players' building privileges, you can clear the Authorization List by targeting the cupboard, holding the Use key in order to bring up the Wheel Context Menu and selecting the "Clear Authorized List" option. Any player, regardless of his authorization status, may clear the List. A Tool Cupboard can be locked by a [[Code Lock]] or a [[Lock]]. The Tool Cupboard has 24 slots for building upkeep. 
+
+Resources for 24 hours of upkeep will be displayed if you open the TC. Once you place at least one of every resource needed for upkeep, it will tell you how much time you have left before these resources will be used and your base will start decaying. Items placed inside the TC and needed for upkeep will gradually despawn overtime. 
+
+Any kind of resource can be placed in the tool cupboard, even if it is not needed for upkeep.
+
+== Crafting ==
+
+* 1000 [[Wood]]
+
+'''Notes:'''
+* It takes 60 seconds to craft one Tool Cupboard.
+
+== Trivia ==
+* The Tool Cupboard has 100 health.
+* The Tool Cupboard's protection applies to not just [[Building Plan]] structures, but deployable items such as [[Sleeping Bag]]s, [[Chest (Disambiguation)|Chests]], [[Lantern]]s, etc.
+* It is advised when building a base that you start off by placing your Tool Cupboard and securing it. Otherwise, players may come and deploy their own cupboards, lock them up and restrict building access to your own base, effectively claiming it for themselves.
+* The Tool Cupboard has a note on it that reads, "Rust Beta Release Date =" and then the Lambda symbol with a subscript 3 beside it. This is referencing the Half Life 3 release date which has yet to be announced.
+* [[Wooden Ladder]]s were prevented by the Tool Cupboard with [https://rust.facepunch.com/news/devblog-75/ Devblog 75]; this was reversed with [https://rust.facepunch.com/news/devblog-158/ Devblog 158], the update that also allowed the twig tier.
+
+== Gallery ==
+<gallery widths="185">
+Cupboard Radius Top.PNG|The protection area as seen from the top.
+Cupboard Radius Side.PNG|The protection area as seen from the side.
+</gallery>
+
+== References ==
+<references />
+
+{{ExperimentalItemsFooter}}
+[[Category:Experimental Content]]
+[[Category:Items]]
+[[Category:Tool]]
+[[Category:Deployable]]
+[[Category:Construction]]

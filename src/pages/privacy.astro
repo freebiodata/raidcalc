@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { breadcrumbBlock } from '../lib/schema';
+
+const title = 'Privacy Policy – RaidCalc';
+const description =
+  'RaidCalc privacy: no accounts, no analytics cookies, no upload of your raid plans. Plans live in your browser’s local storage. Plain-language summary first.';
+
+const crumbs = [{ name: 'Privacy' }];
+const updated = '2026-10-11';
+---
+<Base title={title} description={description} path="/privacy/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'Privacy', path: '/privacy/' }])]}
+>
+  <section class="page-head">
+    <div class="container prose">
+      <h1>Privacy policy</h1>
+      <p class="value-line">Short version: RaidCalc collects almost nothing, and your raid plans never leave your device.</p>
+      <p class="source-note" style="margin-top:8px">Last updated: {updated}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2 style="margin-top:0">Plain-language summary</h2>
+      <ul>
+        <li><strong>No account, no sign-up</strong> - we don’t know who you are and don’t want to.</li>
+        <li><strong>Your raid plans stay local.</strong> Targets, quantities and sides are saved in your browser’s local storage so the three tools can hand off. That data never leaves your device and is never transmitted to us.</li>
+        <li><strong>No tracking cookies, no ads, no fingerprinting.</strong></li>
+        <li><strong>No selling data.</strong> There is no data to sell.</li>
+        <li>If we ever add privacy-friendly, aggregate analytics (e.g. page-view counts without identifiers), this page will be updated first and the change dated.</li>
+      </ul>
+
+      <h2>What the site stores on your device</h2>
+      <p>
+        One localStorage key, <span class="mono">raidcalc.plan.v1</span>, containing your picked targets and
+        quantities - for example <span class="mono">[{"{"}"t":"sheet-door","q":2{"}"}]</span>. It exists so the
+        calculator, solver and farming ETA share one plan. You can erase it any time with the “Clear plan” button
+        or by clearing site data in your browser.
+      </p>
+
+      <h2>What we collect</h2>
+      <p>
+        Nothing beyond standard, anonymous server logs our host (Cloudflare) keeps for security and abuse
+        prevention - IP addresses and request metadata processed under Cloudflare’s privacy policy. We don’t run
+        Google Analytics or equivalent trackers.
+      </p>
+
+      <h2>Children</h2>
+      <p>Rust is rated mature; this site is intended for the game’s audience and collects no personal information from anyone, of any age.</p>
+
+      <h2>Your rights</h2>
+      <p>
+        Because no personal data is collected, there is generally nothing to export or delete. If you believe we
+        hold personal data about you (e.g. from an email you sent), write to
+        <a href="mailto:hello@raidcalc.top" class="mono">hello@raidcalc.top</a> and we will handle it under GDPR/DPDP
+        principles: access, correction, deletion.
+      </p>
+
+      <h2>Changes</h2>
+      <p>Material changes to this policy will be dated at the top of this page and noted in the <a href="/changelog/">changelog</a>.</p>
+    </div>
+  </section>
+</Base>

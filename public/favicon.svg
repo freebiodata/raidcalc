@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#c25a1f"/>
+  <path d="M0 40 L64 16 L64 26 L0 50 Z" fill="#f5c518"/>
+  <path d="M0 54 L64 30 L64 34 L0 58 Z" fill="#1b1d20"/>
+  <text x="10" y="30" font-family="Arial Black, Arial, sans-serif" font-size="20" font-weight="900" fill="#1b1d20">RC</text>
+</svg>

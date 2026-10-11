@@ -1,0 +1,305 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import { TARGETS, EXPLOSIVES, DAMAGE, DATA_SNAPSHOT } from '../data/raid-data';
+import { cheapestOptions, fmt } from '../lib/raid';
+import { webAppBlock, breadcrumbBlock } from '../lib/schema';
+
+const title = 'Cheapest Way to Raid in Rust – Sulfur Cost Solver | RaidCalc';
+const description =
+  'Rank every way to break a Rust wall or door by sulfur cost: rockets vs C4 vs satchels vs explosive ammo. Soft-side aware, workbench flags. Free.';
+
+const crumbs = [{ name: 'Cheapest Raid Solver' }];
+
+const short = (id: string) => EXPLOSIVES.find((e) => e.id === id)!.short;
+
+// Server-rendered demo ranking (1x sheet metal door) so the page shows real
+// output even before JS runs.
+const demoTarget = TARGETS.find((t) => t.id === 'sheet-door')!;
+const demoOpts = cheapestOptions('sheet-door', 'hard');
+
+const faq = [
+  {
+    q: 'What is the cheapest way to raid in Rust?',
+    a: `<p>On pure sulfur: <strong>beancan grenades and explosive ammo</strong> win on paper for doors, <strong>satchels</strong> win for wood, and <strong>C4 or explosive ammo</strong> for stone and metal - but the practical answer depends on your workbench tier and how much time you have. The solver ranks every option by sulfur for your exact targets and flags the workbench each one needs.</p>`,
+  },
+  {
+    q: 'Why does the solver recommend C4 for stone walls when everyone uses satchels?',
+    a: `<p>Because 2 C4 (4,400 sulfur) is genuinely cheaper than 10 satchels (4,800) on paper. The catch: C4 needs a Tier 3 workbench, 2 tech trash and a long craft chain, while satchels need only Tier 1. The solver shows the bench tier next to every option so you can pick the cheapest route <em>you can actually craft</em>.</p>`,
+  },
+  {
+    q: 'How much cheaper is soft siding?',
+    a: `<p>It depends on the explosive. Explosion-only charges (C4, rockets, satchels, beancans) damage both sides equally - soft siding saves nothing. Explosive ammo and melee tools hit the weak side harder: 173 rounds instead of 185 on a stone wall (saves 300 sulfur), and a torch “pick” drops from 962 hits to 97. Details in the <a href="/guides/soft-side-vs-hard-side/">soft side guide</a>.</p>`,
+  },
+  {
+    q: 'Are beancan grenades really worth using?',
+    a: `<p>For sulfur-per-damage, yes - 69 beancans (8,280 sulfur) is the paper-cheapest way through an armored door, and they cost nothing but gunpowder and metal frags. In practice they are slow to throw, one at a time, with no stick bonus unless right-clicked onto the structure. Great for cheap offline raids on a budget; painful online.</p>`,
+  },
+  {
+    q: 'Why is the MLRS rocket not ranked?',
+    a: `<p>MLRS rockets aren’t craftable - they come from APC, helicopter and elite crates and are fired remotely from the Launch Site MLRS. With no crafting cost there is no sulfur price to rank. The <a href="/raid-cost-calculator/">raid cost calculator</a> still shows how many you need: 3 for a stone wall, 4 for an armored door.</p>`,
+  },
+  {
+    q: 'Does this account for satchels that dud?',
+    a: `<p>No - the ranking is exact minimums. Satchels have a random fuse and a small chance to malfunction (documented on the Rust Wiki), so many raiders multiply satchel counts by ~1.2. We keep the numbers honest and let you choose the buffer.</p>`,
+  },
+];
+---
+<Base title={title} description={description} path="/cheapest-raid-solver/" crumbs={crumbs}
+  jsonLd={[webAppBlock('/cheapest-raid-solver/', 'Rust Cheapest Raid Solver', description), breadcrumbBlock([{ name: 'Cheapest Raid Solver', path: '/cheapest-raid-solver/' }])]}
+>
+  <section class="hero">
+    <div class="container">
+      <span class="kicker"><Icon name="route" size={13} /> Tool 02 · Sulfur optimizer</span>
+      <h1>Cheapest Raid Solver</h1>
+      <p class="value-line">
+        Every wall and door can die a hundred ways. The solver ranks them all by sulfur - so “cheapest raid”
+        becomes a shopping list, not a guess: e.g. 2 sheet doors + 1 stone wall = <strong>7,550 sulfur</strong>
+        (126 explosive rounds + 2 C4).
+      </p>
+      <div class="trust-microline">
+        <span><Icon name="check" size={14} /> Free, no sign-up</span>
+        <span><Icon name="check" size={14} /> Ranks by sulfur, flags workbench tiers</span>
+        <span><Icon name="check" size={14} /> Soft-side aware</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard-tape" aria-hidden="true"></div>
+
+  <section class="section" style="padding-top:22px">
+    <div class="container tool-layout stacked-right">
+      <div>
+        <div class="panel">
+          <h2 class="panel-title"><Icon name="list-checks" /> Your plan</h2>
+          <div class="panel-pad">
+            <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:14px">
+              <span class="big-num-label" id="side-label">Side you can hit</span>
+              <div class="seg" role="group" aria-labelledby="side-label">
+                <button type="button" data-side="hard" aria-pressed="true">Strong side</button>
+                <button type="button" data-side="soft" aria-pressed="false">Weak (soft) side</button>
+              </div>
+            </div>
+            <div id="plan-chips" class="result-empty" style="margin-bottom:14px">
+              <Icon name="info" />
+              <span>Loading your plan from the <a href="/raid-cost-calculator/">raid cost calculator</a>… or start with the demo plan.</span>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button type="button" class="btn btn-ghost btn-small" id="use-demo"><Icon name="flask-conical" size={14} /> Load demo plan</button>
+              <a class="btn btn-ghost btn-small" href="/raid-cost-calculator/"><Icon name="hammer" size={14} /> Edit targets</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel result-block" id="solver-panel" aria-live="polite">
+          <h2 class="panel-title"><Icon name="trophy" /> Ranked by sulfur</h2>
+          <div class="panel-pad" id="solver-output">
+            <div class="result-empty">
+              <Icon name="info" />
+              <span>Your ranked options appear here. Server-side example below shows exactly what you’ll get.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="panel" style="position:sticky;top:74px">
+          <h2 class="panel-title"><Icon name="sigma" /> Cheapest raid</h2>
+          <div class="panel-pad">
+            <div class="stat">
+              <div class="big-num" id="mixed-sulfur">-</div>
+              <div class="big-num-label">sulfur for the whole plan</div>
+            </div>
+            <div id="mixed-list" style="margin-top:12px;font-size:0.9rem;color:var(--ink-soft)"></div>
+            <div style="display:grid;gap:8px;margin-top:14px">
+              <a class="btn" href="/sulfur-farming-calculator/"><Icon name="pickaxe" size={16} /> Time to farm this</a>
+              <a class="btn btn-ghost" href="/raid-cost-calculator/"><Icon name="calculator" size={16} /> Change targets</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section" id="example">
+    <div class="container">
+      <h2>Worked example: 1× {demoTarget.name}</h2>
+      <p class="lede" style="color:var(--muted)">Rendered on the server with the same ranking the tool runs - no JavaScript involved.</p>
+      <div style="margin-top:14px;display:grid;gap:10px;max-width:760px">
+        {demoOpts.map((o, i) => (
+          <div class:list={['rank-row', i === 0 && 'best']}>
+            <span class="rank-n">{i + 1}</span>
+            <span class="rank-name">{short(o.explosiveId)}</span>
+            <span class="rank-count">{fmt(o.count)}× needed</span>
+            <span class="badge">{o.bench > 0 ? `Workbench T${o.bench}` : 'No bench'}</span>
+            <span class="rank-sulfur">{fmt(o.sulfur)} sulfur</span>
+          </div>
+        ))}
+      </div>
+      <p class="source-note" style="margin-top:12px">
+        63 explosive rounds × 25 sulfur = 1,575 - the paper-cheapest opener in the game. MLRS (1, not craftable) and
+        torches (excluded as a meme method) are covered in the <a href="/raid-chart/">full chart</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works">
+    <div class="container prose">
+      <h2>How the solver ranks your raid</h2>
+      <p>
+        For each target in your plan, every craftable explosive gets a score:
+        <span class="mono">count × sulfur per explosive</span>, where
+        <span class="mono">count = ceil(target HP ÷ damage)</span>. The cheapest option per target wins a slot in
+        the mixed raid, and the sidebar total is the sum - that’s your “cheapest raid” quote, like
+        <em>4 rockets + 1 satchel = 3,340 sulfur</em> for someone else’s base. Your quote is computed live from your
+        own target list.
+      </p>
+      <h3>What the ranking deliberately ignores</h3>
+      <ul>
+        <li><strong>Workbench gating is shown, not sorted on.</strong> A T3 route can be sulfur-cheapest yet uncraftable for you - the badges tell you when.</li>
+        <li><strong>Time and risk.</strong> 112 beancans are cheap in sulfur and expensive in exposure. Offline vs online changes the right answer.</li>
+        <li><strong>Dud chance.</strong> Satchel minimums are exact; the wiki documents a malfunction chance, so budget spares.</li>
+      </ul>
+      <p class="source-note">Ranked data snapshot {DATA_SNAPSHOT} · sources and reconciliation on the <a href="/methodology/">methodology page</a>.</p>
+    </div>
+  </section>
+
+  <FAQ items={faq} />
+
+  <section class="section">
+    <div class="container">
+      <h2>Related tools &amp; guides</h2>
+      <div class="card-grid">
+        <a class="tool-card" href="/raid-cost-calculator/">
+          <h3><Icon name="calculator" /> Raid Cost Calculator</h3>
+          <p>Build the target list: walls, doors, TC, turrets - with quantities and sides.</p>
+          <span class="tool-card-go">Build a plan →</span>
+        </a>
+        <a class="tool-card" href="/sulfur-farming-calculator/">
+          <h3><Icon name="pickaxe" /> Sulfur Farming ETA</h3>
+          <p>Turn the sulfur quote into farming time at your nodes-per-hour rate.</p>
+          <span class="tool-card-go">Time the grind →</span>
+        </a>
+        <a class="tool-card" href="/raid-chart/">
+          <h3><Icon name="table-properties" /> Rust Raid Chart</h3>
+          <p>Every explosive × every target in one static table.</p>
+          <span class="tool-card-go">Open the chart →</span>
+        </a>
+        <a class="tool-card" href="/guides/soft-side-vs-hard-side/">
+          <h3><Icon name="flip-horizontal" /> Soft Side vs Hard Side</h3>
+          <p>The mechanics behind the solver’s soft-side switch.</p>
+          <span class="tool-card-go">Learn the trick →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="trust-block">
+        <span><Icon name="shield-check" size={15} /> Made by <a href="/about/">RaidCalc</a></span>
+        <span><Icon name="book-open" size={15} /> Method: <a href="/methodology/">count × sulfur, ranked</a></span>
+        <span><Icon name="calendar-check" size={15} /> Last verified: {DATA_SNAPSHOT}</span>
+        <span><Icon name="mail" size={15} /> Wrong number? <a href="/contact/">Tell us</a></span>
+      </div>
+    </div>
+  </section>
+
+  <script type="application/json" id="rc-data" set:html={JSON.stringify({
+    targets: TARGETS.map((t) => ({ id: t.id, name: t.name, short: t.short, hp: t.hp, wood: !!t.wood, cat: t.category, note: t.note ?? null })),
+    explosives: EXPLOSIVES.map((e) => ({ id: e.id, name: e.name, short: e.short, sulfur: e.sulfur, bench: e.bench, kind: e.kind })),
+    damage: DAMAGE,
+  })} />
+
+  <script>
+    import { loadPlan, savePlan, onPlan } from '../lib/plan-store';
+    import { optionsForPayload, cheapestMixedFromPayload, fmt, type Payload, type PlanRowLite } from '../lib/raid-client';
+
+    const dataEl = document.getElementById('rc-data') as HTMLScriptElement;
+    const payload = JSON.parse(dataEl.textContent!) as Payload;
+    const exById = new Map(payload.explosives.map((e) => [e.id, e]));
+
+    let side: 'hard' | 'soft' = 'hard';
+    let plan: PlanRowLite[] = loadPlan();
+
+    const chipsEl = document.getElementById('plan-chips')!;
+    const outEl = document.getElementById('solver-output')!;
+    const mixedSulfur = document.getElementById('mixed-sulfur')!;
+    const mixedList = document.getElementById('mixed-list')!;
+
+    function render() {
+      if (!plan.length) {
+        chipsEl.innerHTML = `<span>No plan loaded - using the demo plan: 2× sheet metal door, 1× stone wall.</span>`;
+        plan = [
+          { t: 'sheet-door', q: 2, s: side },
+          { t: 'stone-wall', q: 1, s: side },
+        ];
+      } else {
+        chipsEl.innerHTML = plan.map((r) => {
+          const t = payload.targets.find((x) => x.id === r.t)!;
+          return `<span class="badge badge-orange">${r.q}× ${t.short}${(r.s ?? side) === 'soft' ? ' · soft' : ''}</span>`;
+        }).join('');
+      }
+
+      const mixed = cheapestMixedFromPayload(payload, plan);
+      mixedSulfur.textContent = fmt(mixed.sulfur);
+      mixedList.innerHTML = mixed.groups.map((g) => {
+        const ex = exById.get(g.id)!;
+        return `<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line-soft)">
+          <span>${fmt(g.count)}× ${ex.short}</span><span class="mono" style="color:var(--orange-hi)">${fmt(g.sulfur)}</span>
+        </div>`;
+      }).join('') || '<span style="color:var(--muted)">Nothing to price yet.</span>';
+
+      outEl.innerHTML = plan.map((row) => {
+        const t = payload.targets.find((x) => x.id === row.t)!;
+        const s = row.s ?? side;
+        const opts = optionsForPayload(payload, row.t, s);
+        return `
+        <div style="margin-bottom:20px">
+          <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+            <h3 style="margin:0">${fmt(row.q)}× ${t.name}</h3>
+            <span class="badge">${s === 'soft' ? 'weak side' : 'strong side'}</span>
+            <span class="badge">${fmt(t.hp)} HP</span>
+          </div>
+          <div style="display:grid;gap:8px;margin-top:10px">
+            ${opts.map((o, i) => `
+              <div class="rank-row ${i === 0 ? 'best' : ''}">
+                <span class="rank-n">${i + 1}</span>
+                <span class="rank-name">${exById.get(o.id)!.short}</span>
+                <span class="rank-count">${fmt(o.count * row.q)}× total <span style="color:var(--muted)">(${o.count} each)</span></span>
+                <span class="badge ${o.bench === 3 ? 'badge-orange' : ''}">${o.bench > 0 ? 'Bench T' + o.bench : 'No bench'}</span>
+                <span class="rank-sulfur">${fmt(o.sulfur * row.q)} sulfur</span>
+              </div>`).join('')}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    document.querySelectorAll('.seg button[data-side]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        side = (btn as HTMLElement).dataset.side as 'hard' | 'soft';
+        document.querySelectorAll('.seg button[data-side]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        plan.forEach((r) => (r.s = side));
+        savePlan(plan);
+        render();
+      });
+    });
+
+    document.getElementById('use-demo')?.addEventListener('click', () => {
+      plan = [
+        { t: 'sheet-door', q: 2, s: side },
+        { t: 'stone-wall', q: 1, s: side },
+      ];
+      savePlan(plan);
+      render();
+    });
+
+    onPlan(() => {
+      plan = loadPlan();
+      render();
+    });
+
+    render();
+  </script>
+</Base>

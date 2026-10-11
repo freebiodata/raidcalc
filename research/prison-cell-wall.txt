@@ -1,0 +1,29 @@
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+ | title             = Prison Cell Wall
+ | description       = A prison cell wall
+ | shortname         = wall.frame.cell
+ | stacksize         = 1
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 30
+ | ingredients       = {{ItemCount|Metal Fragments|200}}
+ | usedinitems       = No
+}}
+The '''Prison Cell Wall''' is a deployable structure that can be placed within a wall frame. It is a see-through metal grill that also functions as a wall. The Prison Cell Wall is, presumably, used to keep things behind bars, and is highly resistant against bullet, melee and fire damage. However, the Prison Cell Wall is easily destroyed with explosive weapons. The Prison Cell Wall is aesthetically similar to the [[Prison Cell Gate]] and the [[Floor Grill]].
+
+The Prison Cell Wall has 250 health.
+
+== Crafting ==
+The Prison Cell Wall can be crafted with:
+* 200 [[Metal Fragments]]
+
+
+
+
+
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Experimental Content]]
+[[Category:Construction]]

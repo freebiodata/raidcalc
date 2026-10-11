@@ -1,0 +1,65 @@
+---
+import Base from '../layouts/Base.astro';
+import { breadcrumbBlock } from '../lib/schema';
+
+const title = 'All Pages – RaidCalc';
+const description =
+  'Complete index of RaidCalc: the three Rust raid calculators, the raid chart, guides and information pages.';
+
+const crumbs = [{ name: 'All pages' }];
+
+const groups: { heading: string; links: [string, string][] }[] = [
+  {
+    heading: 'Calculators',
+    links: [
+      ['Rust Raid Cost Calculator', '/raid-cost-calculator/'],
+      ['Cheapest Raid Solver', '/cheapest-raid-solver/'],
+      ['Sulfur Farming ETA', '/sulfur-farming-calculator/'],
+    ],
+  },
+  {
+    heading: 'Reference',
+    links: [
+      ['Rust Raid Chart', '/raid-chart/'],
+      ['Guides index', '/guides/'],
+      ['Soft Side vs Hard Side', '/guides/soft-side-vs-hard-side/'],
+    ],
+  },
+  {
+    heading: 'About',
+    links: [
+      ['About RaidCalc', '/about/'],
+      ['Methodology & Sources', '/methodology/'],
+      ['Changelog', '/changelog/'],
+      ['Contact', '/contact/'],
+      ['Privacy Policy', '/privacy/'],
+      ['Terms of Use', '/terms/'],
+    ],
+  },
+];
+---
+<Base title={title} description={description} path="/sitemap/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'All pages', path: '/sitemap/' }])]}
+>
+  <section class="page-head">
+    <div class="container">
+      <h1>All pages</h1>
+      <p class="value-line">Everything on RaidCalc, one page. The XML sitemap for search engines lives at <a class="mono" href="/sitemap-index.xml">/sitemap.xml</a>.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="display:grid;gap:26px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      {groups.map((g) => (
+        <div>
+          <h2 style="margin-top:0;font-size:1rem">{g.heading}</h2>
+          <ul style="list-style:none;padding:0;margin:0">
+            {g.links.map(([label, href]) => (
+              <li style="margin-bottom:9px"><a href={href}>{label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </section>
+</Base>

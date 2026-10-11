@@ -1,0 +1,34 @@
+{{Template:LastUpdate|904.83}}
+{{Infobox-Item
+ | title             = Sheet Metal Double Door
+ | description       = A hinged double door which is made out of sheets of metal and wood
+ | shortname         = door.double.hinged.metal
+ | stacksize         = 1
+ | type              = Construction
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 60
+ | ingredients       = {{ItemCount|Wood|600}}{{ItemCount|Metal Fragments|300}}
+ | usedinitems       = No
+}}
+The '''Sheet Metal Double Door''' is a hinged double door which is made of sheet metal and wood. It is a deployable that is placed on a wall frame and acts like a regular door. It has 250 health and is stronger than the [[Wood Double Door]], but weaker than the [[Armored Double Door]]. The Sheet Metal Double Door is vulnerable to damage from explosive weapons such as the [[Timed Explosive Charge]], but is resistant to damage from melee weapons and firearms. You can lock the door with a [[Lock]] or [[Code Lock]].
+
+To open or close a door, press the Use key (default "E").
+
+== Crafting ==
+The Sheet Metal Double Door can be crafted with:
+* 300 [[Metal Fragments]]
+It takes 60 seconds to craft a single Sheet Metal Double Door.
+
+== Researching ==
+default blueprint
+
+
+
+
+{{ExperimentalItemsFooter}}
+[[Category:Items]]
+[[Category:Experimental Content]]
+[[Category:Door]]
+[[Category:Construction]]
+[[Category:Deployable]]

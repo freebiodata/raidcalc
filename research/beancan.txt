@@ -1,0 +1,67 @@
+{{Infobox-Item
+ | title             = Beancan Grenade
+ | description       = Unreliable explosive device.
+ | shortname         = grenade.beancan
+ | stacksize         = 5
+ | type              = Explosive
+ | canbethrown       = No
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 8
+ | ingredients       = {{ItemCount|Gun Powder|60}}{{ItemCount|Metal Fragments|20}}
+ | usedinitems       = Yes
+ | usedin            = {{ItemCount|Satchel Charge|}}
+}}{{Template:LastUpdate|904.83}}
+
+The '''Beancan Grenade''' is an improvised explosive in Experimental Rust. It is an adequately effective, grenade-like explosive that was [http://playrust.com/devblog-59/#more-3351 implemented] in Rust on May 7, 2015. It is, seemingly, based on [https://en.wikipedia.org/wiki/Jam_tin_grenade Jam Tin Grenades].
+
+The primary fire button, or left mouse button, is used to throw the beancan grenade. However, the beancan grenade, being improvised, can be unreliable at times. Sometimes, the grenade will not explode, or it will explode with a long or short delay. It does fairly high damage up close, and will likely inflict the [[Bleeding]] effect on a player. It has a long, crude wick that enables it to be used without killing both the target and the player throwing it. The player also has the ability to pick up a bean can grenade, lit or unused, off of the ground and throw it again as wanted. However, this may not be the best idea during combat as a lit grenade may explode late, and the player trying to pick it up will be severely wounded or killed. Sometimes, the grenade will be a dud grenade and unusable. The beancan grenade is single-use, unless it is a dud, in which case it will not explode. There is a 50% chance dud re-ignites when picked up.
+
+The right mouse button can be used to drop the bean can grenade rather than throw it. When facing a structure or door, right clicking will stick it to the door. This makes it slightly more effective rather than blindly throwing it at the door.
+
+The beancan grenade is also the main ingredient for making [[Satchel Charge]]s.
+
+== Possibilities when thrown ==
+[[File:Beancanheld.png|thumb|400x600px|The Beancan Grenade as seen in first-person view]]
+When not a dud (75%):
+* 70% chance bean can is predictable with a 3.5-4 second fuse.
+* 15% chance for a very short fuse (explodes very shortly after being thrown).
+* 15% chance for an extra long fuse. 
+There is a 25% chance for a dud:
+* 50% chance for dud to re-ignite when picked up.<!-- That's not how percentages work, someone should look-up the numbers -->
+
+== Damage and function times ==
+{{Infobox-Damage
+ | ItemModTimedExplosive = true
+ | Explosion         = 15
+ | Blunt             = 50
+ | Stab              = 50
+ | canStick          = False
+ | explosionRadius   = 4.5
+ | explosionForward  = False
+ | minExplosionRadius= 1.5
+ | onlyDamageParent  = False
+ | timerAmountMax    = 4.0
+ | timerAmountMin    = 3.5
+ | totalDamage       = 115.0
+}}
+{{clr}}
+
+== Crafting ==
+The Beancan Grenade takes 30 seconds to craft and requires:
+* 60 [[Gun Powder]]
+* 20 [[Metal Fragments]]
+
+== Researching ==
+The Beancan Grenade Blueprint can be researched with:
+* 75 [[Scrap]]
+
+== Demolition ==
+{{:Destruction}}
+{{Clr}}
+{{ExperimentalItemsFooter}}
+[[Category:Weapons]]
+[[Category:Items]]
+[[Category:Explosives]]
+[[Category:Experimental Content]]
+[[Category:Throwable Weapon]]

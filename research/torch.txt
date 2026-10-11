@@ -1,0 +1,71 @@
+{{Infobox-Item
+ | title             = Torch
+ | description       = A Torch. Lights your way at night and can be used as a weapon.
+ | shortname         = torch
+ | stacksize         = 1
+ | type              = Melee Weapon
+ | dmghead           = 15
+ | dmgchest          = 5
+ | dmgarms           = 5
+ | dmglegs           = 4
+ | canbethrown       = No
+ | range             = 1.5
+ | craftable         = Yes
+ | knowndefault      = No
+ | crafttime         = 30
+ | ingredients       = {{ItemCount|Wood|30}}{{ItemCount|Cloth|1}}{{ItemCount|Low Grade Fuel|1}}
+ | usedinitems       = No
+}}
+{{Template:LastUpdate|904.83}}
+
+Torches provide light. They are one of two things the player will spawn with in Experimental Rust (the other being the [[Rock]]). Right click to turn them off and on. Once it's on, a Torch will slowly burn fuel, which is represented by the same bar as the durability bar. Torches are quite effective last-resort melee weapons when lit, but when hitting an object or building loses durability significantly faster than most other items in Rust. Be cautious when lighting a torch outside at night, because this makes you highly visible to other players, some of which may try to kill you.
+[[File:New Torch FX.png|none|thumb|363x363px|The latest view model of the Torch in-game.]]
+
+== Damage and function times ==
+{{Infobox-Damage
+ | ItemModBaseMelee  = true
+ | canBeThrown       = False
+ | maxDistance       = 1.5
+ | repeatDelay       = 0.0
+ | meleetotalDamage  = 5.0
+ | meleeBlunt        = 5
+ | showGathering     = true
+ | fleshCondLost     = 0.0
+ | fleshDestroy      = 0
+ | fleshDamage       = 0
+ | oreCondLost       = 0.0
+ | oreDestroy        = 0
+ | oreDamage         = 0
+ | treeCondLost      = 0.0
+ | treeDestroy       = 0
+ | treeDamage        = 0
+}}
+{{clr}}
+
+== Crafting ==
+A Torch can be crafted with:
+* 30 [[Wood]]
+* 1 [[Cloth]]
+* 1 [[Low Grade Fuel]]
+It takes 30 seconds to craft a Torch.
+
+== Legacy Version ==
+''Main article: [[Torch (Legacy)]]''
+
+A torch can be crafted with:
+
+*1 [[Wood]]
+*1 [[Low Grade Fuel]]
+* 1 [[Cloth]]
+
+== Gallery ==
+<gallery>
+Torch in game.jpg|Lit Torch in game.
+</gallery>
+
+
+{{ExperimentalItemsFooter}}
+[[Category:Tools]]
+[[Category:Items]]
+[[Category:Weapons]]
+[[Category:Light Source]]

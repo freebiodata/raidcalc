@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { breadcrumbBlock } from '../lib/schema';
+
+const title = 'Contact RaidCalc – Report Errors & Feedback';
+const description =
+  'Report a wrong raid count, suggest a target or explosive, or send feedback to RaidCalc. Corrections are checked against sources and dated publicly.';
+
+const crumbs = [{ name: 'Contact' }];
+---
+<Base title={title} description={description} path="/contact/" crumbs={crumbs}
+  jsonLd={[breadcrumbBlock([{ name: 'Contact', path: '/contact/' }])]}
+>
+  <section class="page-head">
+    <div class="container prose">
+      <h1>Contact</h1>
+      <p class="value-line">Wrong number, missing target, or an idea - all feedback is read and answered.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <h2 style="margin-top:0">Email</h2>
+      <p>
+        The fastest way to reach us: <a href="mailto:hello@raidcalc.top" class="mono">hello@raidcalc.top</a>
+      </p>
+      <p>We aim to reply within a week. Data-correction reports get priority - include:</p>
+      <ul>
+        <li>The target and explosive (e.g. “satchels vs garage door”);</li>
+        <li>What the site shows vs what your in-game test produced;</li>
+        <li>If you can, the server date/patch so we can line it up with the snapshot.</li>
+      </ul>
+
+      <h2>Report a data error</h2>
+      <p>
+        Corrections are checked against both sources (Rust Wiki and RustClash - see the
+        <a href="/methodology/">methodology</a>), then shipped with a dated
+        <a href="/changelog/">changelog</a> entry. If the sources disagree with each other, the page says so
+        instead of picking silently.
+      </p>
+
+      <h2>Feature requests</h2>
+      <p>
+        Useful so far: honeycomb/multi-layer planning, upkeep cost estimation, offline-vs-online risk notes. Want
+        something else? Ask - small, sharp tools beat bloated ones, but real raider problems win every argument.
+      </p>
+    </div>
+  </section>
+</Base>
